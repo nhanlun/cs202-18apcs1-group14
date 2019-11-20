@@ -16,6 +16,7 @@ namespace yaosu
 	void hideCursor();
 	void color(int code);
 	void printXY(short x, short y, char c, int colorCode);
+	void setWindow();
 }
 
 #endif

@@ -4,6 +4,7 @@
 
 int main() 
 {
+	yaosu::setWindow();
 	yaosu::fixConsoleWindow();
 	yaosu::hideCursor();
 
