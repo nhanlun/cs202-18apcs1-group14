@@ -1,30 +1,31 @@
-#include "Dinosaur.h"
+#include "Bird.h"
 #include <iostream>
 
-Dinosaur::Dinosaur(int x, int y) : Obstacle(x, y, 14, 4), figL(4), figR(4)
+Bird::Bird(int x, int y) : Obstacle(x, y, 4, 4), figL(4), figR(4)
 {
-	figL[0] = " __           ";
-	figL[1] = "(_^\\-^^^-.    ";
-	figL[2] = "  \\       \\__ ";
-	figL[3] = "   |_|-|_|.__>";
-
-	figR[0] = "           __ ";
-	figR[1] = "    .-^^^-/^_)";
-	figR[2] = " __/       /  ";
-	figR[3] = "<__.|_|-|_|   ";
+	figL[0] = " _  ";
+	figL[1] = ">^) ";
+	figL[2] = "/V\\ ";
+	figL[3] = "(_)>";
+	
+	figR[0] = "  _ ";
+	figR[1] = " (^<";
+	figR[2] = " /V\\";
+	figR[3] = "<(_)";
+	
 }
 
-void Dinosaur::display(Direction dir, const Screen& sc)
+void Bird::display(Direction dir, const Screen& sc)
 {
 	std::string line1, line2, line3, line4;
-	
+
 	if (dir == Direction::LEFT)
 	{
 		int offset = sc.offset(x, dir);
 		line1 = figL[0].substr(offset, width - offset);
 		line2 = figL[1].substr(offset, width - offset);
 		line3 = figL[2].substr(offset, width - offset);
-		line4 = figL[3].substr(offset, width - offset);	
+		line4 = figL[3].substr(offset, width - offset);
 	}
 	else
 	{
