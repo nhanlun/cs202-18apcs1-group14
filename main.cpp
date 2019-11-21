@@ -3,6 +3,7 @@
 #include "Dinosaur.h"
 #include "Screen.h"
 #include "Car.h"
+#include "Bird.h"
 #include <conio.h>
 
 int main() 
@@ -12,7 +13,11 @@ int main()
 	yaosu::hideCursor();
 	Screen sc;
 
-	Dinosaur maleDino(0, 15), femaleDino(198, 15);
+	Bird maleBird(0, 0), femaleBird(213 - 4, 5);
+	maleBird.display(Direction::RIGHT, sc);
+	femaleBird.display(Direction::LEFT, sc);
+
+	Dinosaur maleDino(0, 10), femaleDino(213 - 14, 15);
 	maleDino.display(Direction::RIGHT, sc);
 	femaleDino.display(Direction::LEFT, sc);
 
@@ -22,6 +27,8 @@ int main()
 		if (inp == 27) break;
 		if (inp == 'm')
 		{
+			maleBird.move(Direction::RIGHT, sc);
+			femaleBird.move(Direction::LEFT, sc);
 			maleDino.move(Direction::RIGHT, sc);
 			femaleDino.move(Direction::LEFT, sc);
 		}
