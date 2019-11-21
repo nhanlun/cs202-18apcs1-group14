@@ -2,6 +2,7 @@
 #define SUPPORT_H_
 
 #include <Windows.h>
+#include <iostream>
 
 enum class Direction { UP, LEFT, DOWN, RIGHT };
 

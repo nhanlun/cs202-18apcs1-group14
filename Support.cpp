@@ -1,5 +1,4 @@
 #include "Support.h"
-#include <iostream>
 
 namespace yaosu
 {

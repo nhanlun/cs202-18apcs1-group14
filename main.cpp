@@ -35,10 +35,7 @@ int main()
 	}*/
 
 	//Mai's testing zone
-	yaosu::setWindow();
-	yaosu::fixConsoleWindow();
-	yaosu::hideCursor();
-	Screen sc;
+	/*Screen sc;
 	Car c1(3,3);
 	c1.display(Direction::LEFT, sc);
 	Car c2(20, 3);
@@ -53,8 +50,11 @@ int main()
 			c1.move(Direction::LEFT, sc);
 			c2.move(Direction::RIGHT, sc);
 		}
-	}
+	}*/
 	//c1.display(Direction::LEFT,sc);
-	system("pause");
+	//system("pause");
+
+	Screen screen;
+	screen.splashScreen();
 	return 0;
 }
