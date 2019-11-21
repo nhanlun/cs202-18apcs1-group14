@@ -12,7 +12,7 @@ class Car: public Obstacle
 public:
 	Car();
 	Car(int x, int y);
-	void display(); 
+	void display(Direction dir, const Screen& sc);
 private:
 	std::vector<std::string> figureR;
 	std::vector<std::string> figureL;
