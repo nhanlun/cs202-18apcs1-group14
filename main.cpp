@@ -1,11 +1,12 @@
 #include "Player.h"
 #include "Light.h"
 #include "Dinosaur.h"
+#include "Car.h"
 #include <conio.h>
 
 int main() 
 {
-	yaosu::setWindow();
+	/*yaosu::setWindow();
 	yaosu::fixConsoleWindow();
 	yaosu::hideCursor();
 	Screen sc;
@@ -23,6 +24,11 @@ int main()
 			maleDino.move(Direction::RIGHT, sc);
 			femaleDino.move(Direction::LEFT, sc);
 		}
-	}
+	}*/
+
+	//Mai's testing zone
+	Car c1(3,3);
+	c1.display();
+	system("pause");
 	return 0;
 }
