@@ -38,6 +38,7 @@ namespace yaosu
 		color(colorCode);
 		std::cout << c;
 	}
+
 	void setWindow()
 	{
 		HWND consoleWindow = GetConsoleWindow();

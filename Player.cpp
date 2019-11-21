@@ -3,6 +3,8 @@
 
 People::People() : x(1), y(1), alive(true) {}
 
+People::People(int _x, int _y) : x(_x), y(_y), alive(true) {}
+
 void People::display()
 {
 	yaosu::gotoXY(x - 1, y - 1);
@@ -23,23 +25,23 @@ void People::hide()
 	std::cout << "   ";
 }
 
-void People::move(Direction dir)
+void People::move(Direction dir, const Screen& sc)
 {
 	hide();
 
 	switch (dir)
 	{
 	case Direction::UP:
-		if (y >= 4) y -= 4;
+		if (sc.inScreen(x, y - 5)) y -= 4;
 		break;
 	case Direction::LEFT:
-		if (x >= 1) --x;
+		if (sc.inScreen(x - 4, y)) x -= 3;
 		break;
 	case Direction::DOWN:
-		y += 4;
+		if (sc.inScreen(x, y + 5)) y += 4;
 		break;
 	case Direction::RIGHT:
-		++x;
+		if (sc.inScreen(x + 4, y)) x += 3;
 		break;
 	default:;
 	}

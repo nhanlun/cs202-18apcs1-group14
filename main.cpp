@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Light.h"
+#include "Dinosaur.h"
 #include <conio.h>
 
 int main() 
@@ -7,31 +8,20 @@ int main()
 	yaosu::setWindow();
 	yaosu::fixConsoleWindow();
 	yaosu::hideCursor();
+	Screen sc;
 
-	People yenCao;
-	Light ngaTuHangXanh(50, 0, false);
+	Dinosaur maleDino(0, 15), femaleDino(198, 15);
+	maleDino.display(Direction::RIGHT, sc);
+	femaleDino.display(Direction::LEFT, sc);
 
-	yenCao.display();
-	ngaTuHangXanh.display();
-
-	while (true) 
+	while (true)
 	{
-		char inp = _getch();
+		int inp = _getch();
 		if (inp == 27) break;
-		else switch (inp) {
-		case 'w':
-			yenCao.move(Direction::UP);
-			break;
-		case 'a':
-			yenCao.move(Direction::LEFT);
-			break;
-		case 's':
-			yenCao.move(Direction::DOWN);
-			break;
-		case 'd':
-			yenCao.move(Direction::RIGHT);
-			break;
-		default:;
+		if (inp == 'm')
+		{
+			maleDino.move(Direction::RIGHT, sc);
+			femaleDino.move(Direction::LEFT, sc);
 		}
 	}
 	return 0;
