@@ -11,7 +11,7 @@ public:
 	Obstacle(int _x, int _y, int w, int h);
 	virtual ~Obstacle();
 
-	void move(Direction dir, const Screen& sc);
+	void move(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT) = 0;
 	bool isImpact(int playerX, int playerY);
 

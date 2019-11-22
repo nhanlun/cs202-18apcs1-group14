@@ -6,7 +6,7 @@ Obstacle::Obstacle(int _x, int _y, int w, int h) : x(_x), y(_y), width(w), heigh
 
 Obstacle::~Obstacle() {}
 
-void Obstacle::move(Direction dir, const Screen& sc)
+void Obstacle::move(Direction dir, const Screen& sc, Color color)
 {
 	if (dir == Direction::LEFT && sc.inScreen(x + width - 1, y))
 	{
@@ -19,7 +19,7 @@ void Obstacle::move(Direction dir, const Screen& sc)
 		++x;
 	}
 
-	display(dir, sc);
+	display(dir, sc, color);
 }
 
 void Obstacle::hide(Direction dir)

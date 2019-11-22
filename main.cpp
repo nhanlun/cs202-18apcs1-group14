@@ -19,14 +19,14 @@ int main()
 	yaosu::color(int(Color::DEFAULT));
 
 	Dinosaur dinoA(0, 20);
-	dinoA.display(Direction::LEFT, sc);
+	dinoA.display(Direction::LEFT, sc, Color::GREEN);
 	while (true)
 	{
 		int inp = _getch();
 		if (inp == 27) break;
 		else if (inp == 'm')
 		{
-			dinoA.move(Direction::LEFT, sc);
+			dinoA.move(Direction::LEFT, sc, Color::GREEN);
 		}
 	}
 	return 0;
