@@ -9,7 +9,7 @@ class Dinosaur : public Obstacle
 {
 public:
 	Dinosaur(int x, int y);
-	virtual void display(Direction dir, const Screen& sc);
+	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 
 private:
 	std::vector<std::string> figL;

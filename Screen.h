@@ -14,8 +14,8 @@ public:
 	Light* lightFactory(Direction dir, int row); //create traffic light base on lane row and direction
 
 private:
-	const int width = 212;
-	const int height = 49;
+	const int width = 213;
+	const int height = 50;
 };
 
 #endif

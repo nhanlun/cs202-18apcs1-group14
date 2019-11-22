@@ -12,7 +12,7 @@ public:
 	virtual ~Obstacle();
 
 	void move(Direction dir, const Screen& sc);
-	virtual void display(Direction dir, const Screen& sc) = 0;
+	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT) = 0;
 	bool isImpact(int playerX, int playerY);
 
 protected:

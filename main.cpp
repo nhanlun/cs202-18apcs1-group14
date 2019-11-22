@@ -14,13 +14,20 @@ int main()
 	yaosu::hideCursor();
 	Screen sc;
 
-	Light* l1 = sc.lightFactory(Direction::RIGHT, 10);
-	Light* l2 = sc.lightFactory(Direction::LEFT, 10);
+	sc.splashScreen();
+	system("cls");
+	yaosu::color(int(Color::DEFAULT));
 
-	l1->display();
-	l2->display();
-
-	delete l1;
-	delete l2;
+	Dinosaur dinoA(0, 20);
+	dinoA.display(Direction::LEFT, sc);
+	while (true)
+	{
+		int inp = _getch();
+		if (inp == 27) break;
+		else if (inp == 'm')
+		{
+			dinoA.move(Direction::LEFT, sc);
+		}
+	}
 	return 0;
 }

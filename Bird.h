@@ -9,7 +9,7 @@ class Bird : public Obstacle
 {
 public:
 	Bird(int x, int y);
-	virtual void display(Direction dir, const Screen& sc);
+	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 
 private:
 	std::vector<std::string> figL;

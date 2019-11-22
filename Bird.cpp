@@ -15,7 +15,7 @@ Bird::Bird(int x, int y) : Obstacle(x, y, 4, 4), figL(4), figR(4)
 	
 }
 
-void Bird::display(Direction dir, const Screen& sc)
+void Bird::display(Direction dir, const Screen& sc, Color color)
 {
 	std::string line1, line2, line3, line4;
 
@@ -36,6 +36,7 @@ void Bird::display(Direction dir, const Screen& sc)
 		line4 = figR[3].substr(0, width - offset);
 	}
 
+	yaosu::color(int(color));
 	int row = y, col = max(0, x);
 	yaosu::gotoXY(col, row);
 	std::cout << line1;
@@ -45,4 +46,5 @@ void Bird::display(Direction dir, const Screen& sc)
 	std::cout << line3;
 	yaosu::gotoXY(col, row + 3);
 	std::cout << line4;
+	yaosu::color(int(Color::DEFAULT));
 }
