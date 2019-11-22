@@ -56,5 +56,10 @@ int main()
 
 	Screen screen;
 	screen.splashScreen();
+	/*for (int i = 1; i <= 20; ++i)
+	{
+		yaosu::color(i);
+		std::cout << "a\n";
+	}*/
 	return 0;
 }

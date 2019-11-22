@@ -3,6 +3,7 @@
 
 #include <Windows.h>
 #include <iostream>
+#include <conio.h>
 
 enum class Direction { UP, LEFT, DOWN, RIGHT };
 

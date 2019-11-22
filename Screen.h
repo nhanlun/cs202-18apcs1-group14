@@ -12,7 +12,7 @@ public:
 	void splashScreen();
 private:
 	const int width = 213;
-	const int height = 49;
+	const int height = 50;
 };
 
 #endif
