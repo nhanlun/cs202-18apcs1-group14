@@ -1,11 +1,11 @@
 #include "Player.h"
 #include <iostream>
 
-People::People() : x(1), y(1), alive(true) {}
+Player::Player() : x(1), y(1), alive(true) {}
 
-People::People(int _x, int _y) : x(_x), y(_y), alive(true) {}
+Player::Player(int _x, int _y) : x(_x), y(_y), alive(true) {}
 
-void People::display()
+void Player::display()
 {
 	yaosu::gotoXY(x - 1, y - 1);
 	std::cout << " O ";
@@ -15,7 +15,7 @@ void People::display()
 	std::cout << '/' << ' ' << '\\';
 }
 
-void People::hide()
+void Player::hide()
 {
 	yaosu::gotoXY(x - 1, y - 1);
 	std::cout << "   ";
@@ -25,7 +25,7 @@ void People::hide()
 	std::cout << "   ";
 }
 
-void People::move(Direction dir, const Screen& sc)
+void Player::move(Direction dir, const Screen& sc)
 {
 	hide();
 
@@ -49,7 +49,12 @@ void People::move(Direction dir, const Screen& sc)
 	display();
 }
 
-bool People::isAlive()
+bool Player::isAlive()
 {
 	return alive;
+}
+
+bool Player::isImpact(Obstacle* obstacle) const
+{
+	return obstacle->isImpact(x, y);
 }

@@ -10,10 +10,10 @@ public:
 	void display();
 
 private:
-	enum class Color {RED, GREEN};
+	enum class LightColor {RED, GREEN};
 
 	int x, y;
-	Color color;
+	LightColor color;
 };
 
 #endif

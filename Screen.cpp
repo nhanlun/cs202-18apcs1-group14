@@ -23,3 +23,9 @@ void Screen::splashScreen()
 	yaosu::gotoXY(0, 40);
 	for (int i = 1; i <= 170; ++i) std::cout << '.';
 }
+
+Light* Screen::lightFactory(Direction dir, int row)
+{
+	if (dir == Direction::LEFT) return new Light(0, row, true);
+	return new Light(width, row, true);
+}

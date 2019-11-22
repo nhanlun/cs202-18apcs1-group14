@@ -3,16 +3,18 @@
 
 #include "Support.h"
 #include "Screen.h"
+#include "Obstacle.h"
 
-class People
+class Player
 {
 public:
-	People();
-	People(int _x, int _y);
+	Player();
+	Player(int _x, int _y);
 
 	void move(Direction dir, const Screen& sc);
 	void display();
 	bool isAlive();
+	bool isImpact(Obstacle* obstacle) const;
 
 private:
 	void hide();

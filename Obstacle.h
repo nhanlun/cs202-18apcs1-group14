@@ -13,6 +13,7 @@ public:
 
 	void move(Direction dir, const Screen& sc);
 	virtual void display(Direction dir, const Screen& sc) = 0;
+	bool isImpact(int playerX, int playerY);
 
 protected:
 	int x, y; //top-left corner

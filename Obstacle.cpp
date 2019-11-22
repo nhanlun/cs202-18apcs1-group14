@@ -31,3 +31,8 @@ void Obstacle::hide(Direction dir)
 		yaosu::printXY(column, row, ' ');
 }
 
+bool Obstacle::isImpact(int playerX, int playerY)
+{
+	return (x - 1 <= playerX && playerX <= x + width &&
+		y - 1 <= playerY && playerY <= y + height);
+}

@@ -9,55 +9,18 @@
 
 int main() 
 {
-	/*yaosu::setWindow();
+	yaosu::setWindow();
 	yaosu::fixConsoleWindow();
 	yaosu::hideCursor();
 	Screen sc;
 
-	Bird maleBird(0, 0), femaleBird(213 - 4, 5);
-	maleBird.display(Direction::RIGHT, sc);
-	femaleBird.display(Direction::LEFT, sc);
+	Light* l1 = sc.lightFactory(Direction::RIGHT, 10);
+	Light* l2 = sc.lightFactory(Direction::LEFT, 10);
 
-	Dinosaur maleDino(0, 10), femaleDino(213 - 14, 15);
-	maleDino.display(Direction::RIGHT, sc);
-	femaleDino.display(Direction::LEFT, sc);
+	l1->display();
+	l2->display();
 
-	while (true)
-	{
-		int inp = _getch();
-		if (inp == 27) break;
-		if (inp == 'm')
-		{
-			maleBird.move(Direction::RIGHT, sc);
-			femaleBird.move(Direction::LEFT, sc);
-			maleDino.move(Direction::RIGHT, sc);
-			femaleDino.move(Direction::LEFT, sc);
-		}
-	}*/
-
-	//Mai's testing zone
-	Screen sc;
-	Truck t1(3,3);
-	t1.display(Direction::LEFT, sc);
-	Truck t2(20, 3);
-	t2.display(Direction::RIGHT, sc);
-	while (true)
-	{
-		int key = _getch();
-		if (key == 27)
-			break;
-		if (key == 'm')
-		{
-			t1.move(Direction::LEFT, sc);
-			t2.move(Direction::RIGHT, sc);
-		}
-	}
-	system("pause");
-
-	// End of Mai's testing zone
-
-	//Screen screen;
-	//screen.splashScreen();
-	//system("pause");
+	delete l1;
+	delete l2;
 	return 0;
 }
