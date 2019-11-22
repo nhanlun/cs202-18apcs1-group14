@@ -4,6 +4,7 @@
 #include "Screen.h"
 #include "Car.h"
 #include "Bird.h"
+#include "Truck.h"
 #include <conio.h>
 
 int main() 
@@ -35,11 +36,11 @@ int main()
 	}*/
 
 	//Mai's testing zone
-	/*Screen sc;
-	Car c1(3,3);
-	c1.display(Direction::LEFT, sc);
-	Car c2(20, 3);
-	c2.display(Direction::RIGHT, sc);
+	Screen sc;
+	Truck t1(3,3);
+	t1.display(Direction::LEFT, sc);
+	Truck t2(20, 3);
+	t2.display(Direction::RIGHT, sc);
 	while (true)
 	{
 		int key = _getch();
@@ -47,12 +48,11 @@ int main()
 			break;
 		if (key == 'm')
 		{
-			c1.move(Direction::LEFT, sc);
-			c2.move(Direction::RIGHT, sc);
+			t1.move(Direction::LEFT, sc);
+			t2.move(Direction::RIGHT, sc);
 		}
-	}*/
-	//c1.display(Direction::LEFT,sc);
-	//system("pause");
+	}
+	system("pause");
 
 	Screen screen;
 	screen.splashScreen();
@@ -61,5 +61,7 @@ int main()
 		yaosu::color(i);
 		std::cout << "a\n";
 	}*/
+	// End of Mai's testing zone
+
 	return 0;
 }
