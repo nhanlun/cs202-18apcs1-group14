@@ -36,7 +36,7 @@ int main()
 	}*/
 
 	//Mai's testing zone
-	Screen sc;
+	/*Screen sc;
 	Truck t1(3,3);
 	t1.display(Direction::LEFT, sc);
 	Truck t2(20, 3);
@@ -52,7 +52,7 @@ int main()
 			t2.move(Direction::RIGHT, sc);
 		}
 	}
-	system("pause");
+	system("pause");*/
 
 	Screen screen;
 	screen.splashScreen();
@@ -62,6 +62,6 @@ int main()
 		std::cout << "a\n";
 	}*/
 	// End of Mai's testing zone
-
+	system("pause");
 	return 0;
 }
