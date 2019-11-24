@@ -46,3 +46,9 @@ bool Obstacle::outOfScreen(Direction dir, const Screen& sc)
 	if (dir == Direction::LEFT) return (x + width < sc.getLeftBorder());
 	return (x - 1 > sc.getRightBorder());
 }
+
+bool Obstacle::isImpact(int pos)
+{
+	if (pos + 1 < x || pos - 1 > x + width - 1) return false;
+	return true;
+}

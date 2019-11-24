@@ -49,7 +49,7 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 			//Turn green
 			if (!trafficLight->isGreen())
 			{
-				Sleep(redTime);
+				Sleep(redTime * 1000);
 				changeLight(mtx);
 			}
 		}
@@ -58,6 +58,14 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 		++time;
 		Sleep(80);
 	}
+}
+
+bool Lane::isImpact(int x)
+{
+	for (auto& i : obstacles)
+		if (i->isImpact(x))
+			return true;
+	return false;
 }
 
 Obstacle* Lane::obsFactory()

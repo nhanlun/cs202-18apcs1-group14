@@ -18,6 +18,8 @@ public:
 	void reset(); // reset obstacle to the starting position (xStart, yStart)
 	bool outOfScreen(Direction dir, const Screen& sc);
 
+	bool isImpact(int pos);
+
 protected:
 	int x, y; //top-left corner
 	int width, height; //size of figures
