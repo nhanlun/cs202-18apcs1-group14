@@ -1,8 +1,9 @@
 #include "Lane.h"
 
-Lane::Lane(Direction _dir, Type _type, int _delay, Color _code, int row, int speed, int _lightDelay) : 
-	dir(_dir), obsType(_type), timeDelay(_delay), obsColor(_code), time(0), speed(speed), row(row), 
-	lightDelay(_lightDelay)
+Lane::Lane(Direction _dir, Type _type, int _row, int spawn, int _speed, 
+	int _green, int _red, Color _clr) : dir(_dir), obsType(_type), row(_row), 
+	spawnTime(spawn), speed(_speed), greenTime(_green), redTime(_red), 
+	obsColor(_clr)
 {
 	trafficLight = sc.lightFactory(dir, row);
 }
@@ -15,52 +16,75 @@ Lane::~Lane()
 
 void Lane::run(const Screen& sc, std::mutex* mtx)
 {
-	int x = dir == Direction::LEFT ? sc.getRightBorder() : sc.getLeftBorder();
 	while (true)
 	{
-		if (time % timeDelay == 0)
+		//Spawn the obstacles
+		if (time % spawnTime == 0)
 		{
-			Obstacle* tmp = nullptr;
-			switch (obsType)
-			{
-			case Type::BIRD:
-				tmp = new Bird(x, row, dir);
-				break;
-			case Type::CAR:
-				tmp = new Car(x, row);
-				break;
-			case Type::DINOSAUR:
-				tmp = new Dinosaur(x, row);
-				break;
-			case Type::TRUCK:
-				tmp = new Truck(x, row);
-				break;
-			}
-			
-			obstacles.push_back(tmp);
+			Obstacle* tmp = obsFactory();
+			if (tmp) obstacles.push_back(tmp);
 		}
+
+		//Move the obstacles
 		if (time % speed == 0 && trafficLight->isGreen())
 		{
 			mtx->lock();
-			for (auto& i : obstacles)
-			{
-				i->move(dir, sc, obsColor);	
-			}
+			for (auto& i : obstacles) i->move(dir, sc, obsColor);	
 			mtx->unlock();
+
+			//Obstacles that run out of map
 			if (!obstacles.empty() && obstacles[0]->outOfScreen(dir, sc))
 			{
 				delete obstacles[0];
 				obstacles.erase(obstacles.begin());
 			}
 		}
-		if (time % lightDelay == 0)
+
+		//Traffic light handling
+		if (time % greenTime == 0)
 		{
-			mtx->lock();
-			trafficLight->changeState();
-			trafficLight->display();
-			mtx->unlock();
+			//Turn red
+			changeLight(mtx);
+
+			//Turn green
+			if (!trafficLight->isGreen())
+			{
+				Sleep(redTime);
+				changeLight(mtx);
+			}
 		}
-		Sleep(80);
+
+		//Count the clock
 		++time;
+		Sleep(80);
 	}
+}
+
+Obstacle* Lane::obsFactory()
+{
+	int x = 0;
+	if (dir == Direction::LEFT) x = sc.getRightBorder();
+	else x = sc.getLeftBorder();
+
+	switch (obsType)
+	{
+	case Type::BIRD:
+		return new Bird(x, row, dir);
+	case Type::CAR:
+		return new Car(x, row, dir);
+	case Type::DINOSAUR:
+		return new Dinosaur(x, row, dir);
+	case Type::TRUCK:
+		return new Truck(x, row, dir);
+	default:
+		return nullptr;
+	}
+}
+
+void Lane::changeLight(std::mutex* mtx)
+{
+	mtx->lock();
+	trafficLight->changeState();
+	trafficLight->display();
+	mtx->unlock();
 }
