@@ -10,6 +10,7 @@ class Truck : public Obstacle
 public:
 	Truck();
 	Truck(int x, int y);
+	Truck(int border, int y, Direction dir);
 	void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 private:
 	std::vector<std::string> figL;

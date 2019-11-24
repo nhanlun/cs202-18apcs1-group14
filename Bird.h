@@ -9,6 +9,7 @@ class Bird : public Obstacle
 {
 public:
 	Bird(int x, int y);
+	Bird(int border, int y, Direction dir);
 	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 
 private:

@@ -9,13 +9,13 @@ Screen::Screen()
 
 bool Screen::inScreen(int x, int y) const
 {
-	return (x >= 0 && x <= width - 1 && y >= 0 && y <= height - 1);
+	return (x >= leftBorder && x <= rightBorder && y >= 0 && y <= height - 1);
 }
 
 int Screen::offset(int x, Direction dir) const
 {
-	if (dir == Direction::LEFT) return max(0, -x);
-	return max(0, x - width + 1);
+	if (dir == Direction::LEFT) return max(0, leftBorder - x);
+	return max(0, x - rightBorder - 1);
 }
 
 void Screen::splashScreen()

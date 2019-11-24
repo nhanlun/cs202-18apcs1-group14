@@ -9,6 +9,7 @@ Lane::Lane(Direction _dir, Type _type, int _delay, Color _code, int row, int spe
 Lane::~Lane()
 {
 	delete trafficLight;
+	for (auto const& obs : obstacles) delete obs;
 }
 
 void Lane::run(const Screen& sc, std::mutex* mtx)
@@ -22,7 +23,7 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 			switch (obsType)
 			{
 			case Type::BIRD:
-				tmp = new Bird(x, row);
+				tmp = new Bird(x, row, dir);
 				break;
 			case Type::CAR:
 				tmp = new Car(x, row);
@@ -41,7 +42,11 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 		{
 			mtx->lock();
 			for (auto& i : obstacles)
-				i->move(dir, sc);
+			{
+				i->move(dir, sc, obsColor);
+				if (i->outOfScreen(dir, sc)) 
+					obstacles.erase(obstacles.begin());
+			}
 			mtx->unlock();
 		}
 		Sleep(80);

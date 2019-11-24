@@ -8,25 +8,23 @@ Obstacle::~Obstacle() {}
 
 void Obstacle::move(Direction dir, const Screen& sc, Color color)
 {
-	if (dir == Direction::LEFT && sc.inScreen(x + width - 1, y))
-	{
-		hide(dir);
-		--x;
-	}
-	else if (dir == Direction::RIGHT && sc.inScreen(x + 1, y))
-	{
-		hide(dir);
-		++x;
-	}
-
+	hide(dir, sc);
 	display(dir, sc, color);
+	if (dir == Direction::LEFT) --x;
+	else if (dir == Direction::RIGHT) ++x;
 }
 
-void Obstacle::hide(Direction dir)
+void Obstacle::hide(Direction dir, const Screen& sc)
 {
-	int column = x;
-	if (dir == Direction::LEFT) column += width - 1;
+	//Choose column to delete
+	int column = -1;
+	if (dir == Direction::LEFT && sc.inScreen(x + width, y))
+		column = x + width;
+	else if (dir == Direction::RIGHT && sc.inScreen(x - 1, y))
+		column = x - 1;
+	if (column < 0) return;
 
+	//Delete column
 	for (int row = y; row < y + height; ++row)
 		yaosu::printXY(column, row, ' ');
 }
@@ -41,4 +39,10 @@ void Obstacle::reset()
 {
 	x = xStart;
 	y = yStart;
+}
+
+bool Obstacle::outOfScreen(Direction dir, const Screen& sc)
+{
+	if (dir == Direction::LEFT) return (x + width < sc.getLeftBorder());
+	return (x - 1 > sc.getRightBorder());
 }

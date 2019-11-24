@@ -16,6 +16,7 @@ public:
 	bool isImpact(int playerX, int playerY);
 
 	void reset(); // reset obstacle to the starting position (xStart, yStart)
+	bool outOfScreen(Direction dir, const Screen& sc);
 
 protected:
 	int x, y; //top-left corner
@@ -23,7 +24,7 @@ protected:
 	int xStart, yStart;
 
 private:
-	void hide(Direction dir);
+	void hide(Direction dir, const Screen& sc);
 };
 
 #endif

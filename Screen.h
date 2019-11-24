@@ -20,7 +20,7 @@ private:
 	const int width = 213;
 	const int height = 50;
 
-	const int rightBorder = 170;
+	const int rightBorder = 50;
 	const int leftBorder = 10;
 };
 
