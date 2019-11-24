@@ -4,6 +4,9 @@
 #include <Windows.h>
 #include <iostream>
 #include <conio.h>
+#include <vector>
+#include <thread>
+#include <mutex>
 
 enum class Direction { UP, LEFT, DOWN, RIGHT };
 enum class Type { CAR, TRUCK, DINOSAUR, BIRD };

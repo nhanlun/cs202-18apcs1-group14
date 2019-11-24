@@ -105,3 +105,13 @@ Light* Screen::lightFactory(Direction dir, int row)
 	if (dir == Direction::LEFT) return new Light(0, row, true);
 	return new Light(width - 1, row, true);
 }
+
+int Screen::getLeftBorder() const
+{
+	return leftBorder;
+}
+
+int Screen::getRightBorder() const
+{
+	return rightBorder;
+}

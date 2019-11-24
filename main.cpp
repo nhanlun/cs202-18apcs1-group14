@@ -5,29 +5,22 @@
 #include "Car.h"
 #include "Bird.h"
 #include "Truck.h"
+#include "Lane.h"
 #include <conio.h>
 
 int main() 
 {
-	yaosu::setWindow();
-	yaosu::fixConsoleWindow();
-	yaosu::hideCursor();
 	Screen sc;
-
-	sc.splashScreen();
-	system("cls");
-	yaosu::color(int(Color::DEFAULT));
-
-	Dinosaur dinoA(0, 20);
-	dinoA.display(Direction::LEFT, sc, Color::GREEN);
-	while (true)
-	{
-		int inp = _getch();
-		if (inp == 27) break;
-		else if (inp == 'm')
-		{
-			dinoA.move(Direction::LEFT, sc, Color::GREEN);
-		}
-	}
+	//sc.splashScreen();
+	std::mutex* mtx = new std::mutex;
+	Lane* tmp1 = new Lane(Direction::RIGHT, Type::BIRD, 15, Color::BLUE, 1, 1);
+	Lane* tmp2 = new Lane(Direction::LEFT, Type::CAR, 50, Color::BLUE, 6, 2);
+	std::thread t1(&Lane::run, tmp1, sc, mtx);
+	std::thread t2(&Lane::run, tmp2, sc, mtx);
+	t1.join();
+	t2.join();
+	delete tmp1;
+	delete tmp2;
+	delete mtx;
 	return 0;
 }

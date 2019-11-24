@@ -40,21 +40,21 @@ void Truck::display(Direction dir, const Screen & sc, Color color)
 	std::string line1, line2, line3, line4;
 	if(dir == Direction::LEFT)
 	{
-	int offset = sc.offset(x, Direction::LEFT);
+		int offset = sc.offset(x, Direction::LEFT);
 
-	line1 = figL[0].substr(offset, width - offset);
-	line2 = figL[1].substr(offset, width - offset);
-	line3 = figL[2].substr(offset, width - offset);
-	line4 = figL[3].substr(offset, width - offset);
+		line1 = figL[0].substr(offset, width - offset);
+		line2 = figL[1].substr(offset, width - offset);
+		line3 = figL[2].substr(offset, width - offset);
+		line4 = figL[3].substr(offset, width - offset);
 	}
 	else
 	{
-	int offset = sc.offset(x + width, Direction::RIGHT);
+		int offset = sc.offset(x + width, Direction::RIGHT);
 
-	line1 = figR[0].substr(0, width - offset);
-	line2 = figR[1].substr(0, width - offset);
-	line3 = figR[2].substr(0, width - offset);
-	line4 = figR[3].substr(0, width - offset);
+		line1 = figR[0].substr(0, width - offset);
+		line2 = figR[1].substr(0, width - offset);
+		line3 = figR[2].substr(0, width - offset);
+		line4 = figR[3].substr(0, width - offset);
 	}
 
 	yaosu::color(int(color));
