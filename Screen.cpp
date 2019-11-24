@@ -119,29 +119,29 @@ int Screen::getLeftBorder() const
 void Screen::displayMap()
 {
 	char pavement = 177;
-	int row = 5;
+	int row = 4;
 	
 	yaosu::gotoXY(leftBorder, row);
-	for (int i = leftBorder; i < rightBorder; ++i)
+	for (int i = leftBorder; i <= rightBorder; ++i)
 		std::cout << pavement;
-	for (int i = 1; i <= 3; ++i)
+	for (int i = 1; i <= 4; ++i)
 	{
 		++row;
 		yaosu::gotoXY(leftBorder, row);
 		std::cout << pavement;
-		yaosu::gotoXY(rightBorder - 1, row);
+		yaosu::gotoXY(rightBorder, row);
 		std::cout << pavement;
 	}
 	++row;
 	yaosu::gotoXY(leftBorder, row);
-	for (int i = leftBorder; i < rightBorder; ++i)
+	for (int i = leftBorder; i <= rightBorder; ++i)
 		std::cout << pavement;
 
 	for (int j = 1; j< 4; ++j)
 	{
 		row += 7;
 		yaosu::gotoXY(leftBorder, row);
-		for (int i = leftBorder; i < rightBorder; ++i)
+		for (int i = leftBorder; i <= rightBorder; ++i)
 		{
 			if (i % 2)
 				std::cout << '_';
@@ -153,19 +153,19 @@ void Screen::displayMap()
 
 	
 	yaosu::gotoXY(leftBorder, row);
-	for (int i = leftBorder; i < rightBorder; ++i)
+	for (int i = leftBorder; i <= rightBorder; ++i)
 		std::cout << pavement;
-	for (int i = 1; i <= 3; ++i)
+	for (int i = 1; i <= 4; ++i)
 	{
 		++row;
 		yaosu::gotoXY(leftBorder, row);
 		std::cout << pavement;
-		yaosu::gotoXY(rightBorder - 1, row);
+		yaosu::gotoXY(rightBorder, row);
 		std::cout << pavement;
 	}
 	++row;
 	yaosu::gotoXY(leftBorder, row);
-	for (int i = leftBorder; i < rightBorder; ++i)
+	for (int i = leftBorder; i <= rightBorder; ++i)
 		std::cout << pavement;
 }
 

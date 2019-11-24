@@ -32,16 +32,16 @@ void Player::move(Direction dir, const Screen& sc)
 	switch (dir)
 	{
 	case Direction::UP:
-		if (sc.inScreen(x, y - 6)) y -= 5;
+		if (sc.inScreen(x, y - 8)) y -= 7;
 		break;
 	case Direction::LEFT:
-		if (sc.inScreen(x - 3, y)) x -= 2;
+		if (sc.inScreen(x - 4, y)) x -= 2;
 		break;
 	case Direction::DOWN:
-		if (sc.inScreen(x, y + 6)) y += 5;
+		if (sc.inScreen(x, y + 8)) y += 7;
 		break;
 	case Direction::RIGHT:
-		if (sc.inScreen(x + 3, y)) x += 2;
+		if (sc.inScreen(x + 4, y)) x += 2;
 		break;
 	default:;
 	}

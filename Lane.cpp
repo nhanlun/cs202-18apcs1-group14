@@ -3,7 +3,7 @@
 Lane::Lane(Direction _dir, Type _type, int _row, int spawn, int _speed, 
 	int _green, int _red, Color _clr) : dir(_dir), obsType(_type), row(_row), 
 	spawnTime(spawn), speed(_speed), greenTime(_green), redTime(_red), 
-	obsColor(_clr)
+	obsColor(_clr), time(0)
 {
 	trafficLight = sc.lightFactory(dir, row);
 }
