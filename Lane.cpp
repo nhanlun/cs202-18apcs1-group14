@@ -43,11 +43,14 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 			mtx->lock();
 			for (auto& i : obstacles)
 			{
-				i->move(dir, sc, obsColor);
-				if (i->outOfScreen(dir, sc)) 
-					obstacles.erase(obstacles.begin());
+				i->move(dir, sc, obsColor);	
 			}
 			mtx->unlock();
+			if (!obstacles.empty() && obstacles[0]->outOfScreen(dir, sc))
+			{
+				delete obstacles[0];
+				obstacles.erase(obstacles.begin());
+			}
 		}
 		Sleep(80);
 		++time;
