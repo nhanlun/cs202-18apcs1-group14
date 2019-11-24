@@ -7,6 +7,7 @@ public:
 	Light();
 	Light(int x, int y, bool isGreen);
 	bool isGreen();
+	void changeState();
 	void display();
 
 private:

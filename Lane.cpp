@@ -1,7 +1,8 @@
 #include "Lane.h"
 
-Lane::Lane(Direction _dir, Type _type, int _delay, Color _code, int row, int speed) : 
-	dir(_dir), obsType(_type), timeDelay(_delay), obsColor(_code), time(0), speed(speed), row(row)
+Lane::Lane(Direction _dir, Type _type, int _delay, Color _code, int row, int speed, int _lightDelay) : 
+	dir(_dir), obsType(_type), timeDelay(_delay), obsColor(_code), time(0), speed(speed), row(row), 
+	lightDelay(_lightDelay)
 {
 	trafficLight = sc.lightFactory(dir, row);
 }
@@ -38,7 +39,7 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 			
 			obstacles.push_back(tmp);
 		}
-		if (time % speed == 0)
+		if (time % speed == 0 && trafficLight->isGreen())
 		{
 			mtx->lock();
 			for (auto& i : obstacles)
@@ -51,6 +52,13 @@ void Lane::run(const Screen& sc, std::mutex* mtx)
 				delete obstacles[0];
 				obstacles.erase(obstacles.begin());
 			}
+		}
+		if (time % lightDelay == 0)
+		{
+			mtx->lock();
+			trafficLight->changeState();
+			trafficLight->display();
+			mtx->unlock();
 		}
 		Sleep(80);
 		++time;
