@@ -4,6 +4,7 @@
 #include "Support.h"
 #include "Screen.h"
 #include "Obstacle.h"
+#include <ctype.h>
 
 class Player
 {
@@ -15,6 +16,8 @@ public:
 	void display();
 	bool isAlive();
 	bool isImpact(Obstacle* obstacle) const;
+
+	void play(const Screen& sc, std::mutex* mtx);
 
 private:
 	void hide();

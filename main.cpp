@@ -17,10 +17,16 @@ int main()
 	Lane* tmp2 = new Lane(Direction::LEFT, Type::CAR, 50, Color::BLUE, 6, 2);
 	std::thread t1(&Lane::run, tmp1, sc, mtx);
 	std::thread t2(&Lane::run, tmp2, sc, mtx);
+
+	Player* player = new Player(10, 13);
+	std::thread t3(&Player::play, player, sc, mtx);
+
 	t1.join();
 	t2.join();
+	t3.join();
 	delete tmp1;
 	delete tmp2;
+	delete player;
 	delete mtx;
 	return 0;
 }

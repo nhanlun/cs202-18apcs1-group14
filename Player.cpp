@@ -32,16 +32,16 @@ void Player::move(Direction dir, const Screen& sc)
 	switch (dir)
 	{
 	case Direction::UP:
-		if (sc.inScreen(x, y - 5)) y -= 4;
+		if (sc.inScreen(x, y - 6)) y -= 5;
 		break;
 	case Direction::LEFT:
-		if (sc.inScreen(x - 4, y)) x -= 3;
+		if (sc.inScreen(x - 3, y)) x -= 2;
 		break;
 	case Direction::DOWN:
-		if (sc.inScreen(x, y + 5)) y += 4;
+		if (sc.inScreen(x, y + 6)) y += 5;
 		break;
 	case Direction::RIGHT:
-		if (sc.inScreen(x + 4, y)) x += 3;
+		if (sc.inScreen(x + 3, y)) x += 2;
 		break;
 	default:;
 	}
@@ -57,4 +57,37 @@ bool Player::isAlive()
 bool Player::isImpact(Obstacle* obstacle) const
 {
 	return obstacle->isImpact(x, y);
+}
+
+void Player::play(const Screen& sc, std::mutex* mtx)
+{
+	while (alive)
+	{
+		/*while (!kbhit())
+		{
+		}*/
+		char cmd = toupper(_getch());
+		mtx->lock();
+		switch (cmd)
+		{
+		case 'W':
+			move(Direction::UP, sc);
+			break;
+		case 'S':
+			move(Direction::DOWN, sc);
+			break;
+		case 'D':
+			move(Direction::RIGHT, sc);
+			break;
+		case 'A':
+			move(Direction::LEFT, sc);
+			break;
+		case 27:
+			exit(0);
+			break;
+		default:
+			break;
+		}
+		mtx->unlock();
+	}
 }
