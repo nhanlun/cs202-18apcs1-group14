@@ -10,6 +10,11 @@ bool Light::isGreen()
 	return bool(color);
 }
 
+void Light::changeState()
+{
+	color = LightColor(!bool(color));
+}
+
 void Light::display() 
 {
 	if (color == LightColor::GREEN) yaosu::printXY(x, y, char(178), int(Color::GREEN));
