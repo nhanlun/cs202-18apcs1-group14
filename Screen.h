@@ -15,12 +15,13 @@ public:
 
 	int getRightBorder() const;
 	int getLeftBorder() const;
+	void displayMap();
 
 private:
 	const int width = 213;
 	const int height = 50;
 
-	const int rightBorder = 50;
+	const int rightBorder = 120;
 	const int leftBorder = 10;
 };
 
