@@ -13,7 +13,7 @@
 class Lane
 {
 public:
-	Lane(Direction _dir, Type _type, int _delay, Color _code, int row, int speed);
+	Lane(Direction _dir, Type _type, int _delay, Color _code, int row, int speed, int lightDelay = 20);
 	~Lane();
 	void run(const Screen& sc, std::mutex* mtx); // run the clock and update all the object of that lane
 
@@ -25,6 +25,7 @@ private:
 	int row;
 	Type obsType;
 	Light* trafficLight;
+	int lightDelay;
 	Color obsColor;
 	Screen sc;
 

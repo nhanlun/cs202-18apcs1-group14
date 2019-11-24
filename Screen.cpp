@@ -100,10 +100,15 @@ void Screen::splashScreen()
 	char tmp = _getch();
 }
 
+void Screen::menuScreen()
+{
+
+}
+
 Light* Screen::lightFactory(Direction dir, int row)
 {
-	if (dir == Direction::LEFT) return new Light(0, row, true);
-	return new Light(width - 1, row, true);
+	if (dir == Direction::LEFT) return new Light(leftBorder, row - 1, false);
+	return new Light(rightBorder, row - 1, false);
 }
 
 int Screen::getLeftBorder() const
