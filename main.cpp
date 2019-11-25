@@ -6,29 +6,14 @@
 #include "Bird.h"
 #include "Truck.h"
 #include "Lane.h"
+#include "Level.h"
 #include <conio.h>
 
 int main() 
 {
+	srand(time(NULL));
 	Screen sc;
-	sc.displayMap();
-
-	std::mutex* mtx = new std::mutex;
-	Lane* tmp1 = new Lane(Direction::RIGHT, Type::BIRD, 11, 15, 1);
-	Lane* tmp2 = new Lane(Direction::LEFT, Type::CAR, 18, 50, 2);
-	std::thread t1(&Lane::run, tmp1, sc, mtx);
-	std::thread t2(&Lane::run, tmp2, sc, mtx);
-
-	Player* player = new Player(10, 13);
-	std::thread t3(&Player::play, player, sc, mtx);
-
-	t1.join();
-	t2.join();
-	t3.join();
-	delete tmp1;
-	delete tmp2;
-	delete player;
-	delete mtx;
-
+	Level level(10, sc);
+	level.run(sc);
 	return 0;
 }

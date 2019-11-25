@@ -9,19 +9,22 @@
 #include "Car.h"
 #include "Truck.h"
 #include "Dinosaur.h"
+#include "Player.h"
 
 class Lane
 {
 public:
-	Lane(Direction _dir, Type _type, int _row, int spawn = 20, int _speed = 1, 
-		int _green = 100, int _red = 5, Color _clr = Color::DEFAULT);
+	Lane(const Screen& sc, Direction _dir, Type _type, int _row, 
+		Color _clr = Color::DEFAULT, int spawn = 20, Speed _speed = Speed::SAFE, 
+		int _green = 100, int _red = 5);
 	~Lane();
-	void run(const Screen& sc, std::mutex* mtx); // run the clock and update all the object of that lane
+	void run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p); // run the clock and update all the object of that lane
 
 	bool isImpact(int x);
+	bool isImpact(Player* p) const;
 
 private:
-	Obstacle* obsFactory();
+	Obstacle* obsFactory(const Screen& sc);
 	void changeLight(std::mutex* mtx);
 
 	Direction dir;
@@ -35,7 +38,7 @@ private:
 
 	int time;
 	int spawnTime;
-	int speed; // 1, 2, 3, 4
+	Speed speed;
 	int greenTime;
 	int redTime;
 

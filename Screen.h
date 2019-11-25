@@ -12,11 +12,11 @@ public:
 	int offset(int x, Direction dir) const; //num of pixels to remove to fit the screen
 	void splashScreen();
 	void menuScreen();
-	Light* lightFactory(Direction dir, int row); //create traffic light base on lane row and direction
+	Light* lightFactory(Direction dir, int row) const; //create traffic light base on lane row and direction
 
 	int getRightBorder() const;
 	int getLeftBorder() const;
-	void displayMap();
+	void displayMap() const;
 
 private:
 	const int width = 213;

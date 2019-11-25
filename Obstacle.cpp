@@ -1,8 +1,10 @@
 #include "Obstacle.h"
 
-Obstacle::Obstacle(int w, int h) : x(0), y(0), width(w), height(h), xStart(0), yStart(0) {}
+Obstacle::Obstacle(int w, int h) : x(0), y(0), width(w), height(h), xStart(0), 
+	yStart(0) {}
 
-Obstacle::Obstacle(int _x, int _y, int w, int h) : x(_x), y(_y), width(w), height(h), xStart(_x), yStart(_y) {}
+Obstacle::Obstacle(int _x, int _y, int w, int h) : x(_x), y(_y), width(w), 
+	height(h), xStart(_x), yStart(_y) {}
 
 Obstacle::~Obstacle() {}
 

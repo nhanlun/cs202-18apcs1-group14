@@ -8,11 +8,20 @@
 #include <thread>
 #include <mutex>
 
-enum class Direction { UP, LEFT, DOWN, RIGHT };
-enum class Type { CAR, TRUCK, DINOSAUR, BIRD };
-enum class Color {
+enum class Direction { UP, LEFT, DOWN, RIGHT, Count };
+enum class Type { CAR, TRUCK, DINOSAUR, BIRD, Count };
+enum class Color 
+{
 	DEFAULT = 7, GREY = 8, BLUE = 9, GREEN = 10, CYAN = 11, 
 	RED = 12, PINK = 13, YELLOW = 14, WHITE = 15
+};
+enum class Speed
+{
+	FAST = 1, AVERAGE, SAFE, SLOW
+};
+enum class State
+{
+	RUN, STOP, PAUSE, WIN, LOSE
 };
 
 namespace yaosu

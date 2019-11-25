@@ -59,15 +59,12 @@ bool Player::isImpact(Obstacle* obstacle) const
 	return obstacle->isImpact(x, y);
 }
 
-void Player::play(const Screen& sc, std::mutex* mtx)
+void Player::play(const Screen& sc, std::mutex* ioMtx, State& state)
 {
-	while (alive)
+	while (state == State::RUN)
 	{
-		/*while (!kbhit())
-		{
-		}*/
 		char cmd = toupper(_getch());
-		mtx->lock();
+		ioMtx->lock();
 		switch (cmd)
 		{
 		case 'W':
@@ -83,11 +80,18 @@ void Player::play(const Screen& sc, std::mutex* mtx)
 			move(Direction::LEFT, sc);
 			break;
 		case 27:
-			exit(0);
+			state = State::STOP;
 			break;
-		default:
-			break;
+		default:;
 		}
-		mtx->unlock();
+		ioMtx->unlock();
+
+		if (y == 6) state = State::WIN;
+		Sleep(80);
 	}
+}
+
+void Player::reset()
+{
+	y = 41;
 }

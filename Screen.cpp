@@ -105,7 +105,7 @@ void Screen::menuScreen()
 
 }
 
-Light* Screen::lightFactory(Direction dir, int row)
+Light* Screen::lightFactory(Direction dir, int row) const
 {
 	if (dir == Direction::LEFT) return new Light(leftBorder, row - 1, false);
 	return new Light(rightBorder, row - 1, false);
@@ -116,7 +116,7 @@ int Screen::getLeftBorder() const
 	return leftBorder;
 }
 
-void Screen::displayMap()
+void Screen::displayMap() const
 {
 	char pavement = 177;
 	int row = 4;

@@ -17,7 +17,8 @@ public:
 	bool isAlive();
 	bool isImpact(Obstacle* obstacle) const;
 
-	void play(const Screen& sc, std::mutex* mtx);
+	void play(const Screen& sc, std::mutex* ioMtx, State& state);
+	void reset();
 
 private:
 	void hide();
