@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+#include <conio.h>
 
 Player::Player() : x(1), y(1), alive(true) {}
 
@@ -63,31 +64,32 @@ void Player::play(const Screen& sc, std::mutex* ioMtx, State& state)
 {
 	while (state == State::RUN)
 	{
-		char cmd = toupper(_getch());
-		ioMtx->lock();
-		switch (cmd)
+		if (_kbhit()) 
 		{
-		case 'W':
-			move(Direction::UP, sc);
-			break;
-		case 'S':
-			move(Direction::DOWN, sc);
-			break;
-		case 'D':
-			move(Direction::RIGHT, sc);
-			break;
-		case 'A':
-			move(Direction::LEFT, sc);
-			break;
-		case 27:
-			state = State::STOP;
-			break;
-		default:;
+			char cmd = toupper(_getch());
+			ioMtx->lock();
+			switch (cmd)
+			{
+			case 'W':
+				move(Direction::UP, sc);
+				if (y == 6) state = State::WIN;
+				break;
+			case 'S':
+				move(Direction::DOWN, sc);
+				break;
+			case 'D':
+				move(Direction::RIGHT, sc);
+				break;
+			case 'A':
+				move(Direction::LEFT, sc);
+				break;
+			case 27:
+				state = State::STOP;
+				break;
+			default:;
+			}
+			ioMtx->unlock();
 		}
-		ioMtx->unlock();
-
-		if (y == 6) state = State::WIN;
-		Sleep(80);
 	}
 }
 

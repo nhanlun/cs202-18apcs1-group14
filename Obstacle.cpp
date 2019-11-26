@@ -33,8 +33,8 @@ void Obstacle::hide(Direction dir, const Screen& sc)
 
 bool Obstacle::isImpact(int playerX, int playerY)
 {
-	return (x - 1 <= playerX && playerX <= x + width &&
-		y - 1 <= playerY && playerY <= y + height);
+	return (x - 1 < playerX && playerX < x + width &&
+		y - 1 < playerY && playerY < y + height);
 }
 
 void Obstacle::reset()

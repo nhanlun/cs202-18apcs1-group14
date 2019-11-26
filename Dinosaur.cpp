@@ -1,5 +1,4 @@
 #include "Dinosaur.h"
-#include <iostream>
 
 Dinosaur::Dinosaur(int x, int y) : Obstacle(x, y, 14, 4), figL(4), figR(4)
 {

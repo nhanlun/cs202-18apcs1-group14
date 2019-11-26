@@ -35,33 +35,53 @@ void Level::run(const Screen& sc)
 {
 	unsigned noLane = 1;
 
-	while (gameState != State::LOSE && noLane <= lanes.size())
+	while (noLane <= lanes.size())
 	{
 		system("cls");
 		sc.displayMap();
-
-		gameState = State::RUN;
-		player->reset();
-		player->display();
+		resetPlayer();
 
 		std::vector<std::thread*> vThread;
-		vThread.push_back(new std::thread(&Player::play, player, std::ref(sc),
-			&ioMtx, std::ref(gameState)));
+		addThreadPlayer(vThread, sc);
+		addThreadLanes(vThread, sc, noLane);
+		runThreads(vThread);
 
-		int screenLane = 1;
-		while (noLane <= lanes.size() && screenLane <= 4)
-		{
-			vThread.push_back(new std::thread(&Lane::run, lanes[noLane - 1],
-				std::ref(sc), &ioMtx, std::ref(gameState), player));
-			++noLane;
-			++screenLane;
-		}
-
-		for (auto const& thread : vThread) thread->join();
-		for (auto const& thread : vThread) delete thread;
+		if (gameState == State::LOSE) break;
+		else if (gameState == State::STOP) break;
 	}
 
 	yaosu::gotoXY(150, 15);
 	if (gameState == State::WIN) std::cout << "YOU WIN";
-	else std::cout << "YOU LOSE";
+	else if (gameState == State::LOSE) std::cout << "YOU LOSE";
+}
+
+void Level::resetPlayer()
+{
+	gameState = State::RUN;
+	player->reset();
+	player->display();
+}
+
+void Level::addThreadPlayer(std::vector<std::thread*>& vThread, const Screen& sc)
+{
+	vThread.push_back(new std::thread(&Player::play, player, std::ref(sc),
+		&ioMtx, std::ref(gameState)));
+}
+
+void Level::addThreadLanes(std::vector<std::thread*>& vThread, const Screen& sc, 
+	unsigned& noLane)
+{
+	//Add at most 4 next lanes
+	for (int screenLane = 1; screenLane <= 4 && noLane <= lanes.size(); ++screenLane)
+	{
+		vThread.push_back(new std::thread(&Lane::run, lanes[noLane - 1],
+			std::ref(sc), &ioMtx, std::ref(gameState), player));
+		++noLane;
+	}
+}
+
+void Level::runThreads(std::vector<std::thread*>& vThread)
+{
+	for (auto const& thread : vThread) thread->join();
+	for (auto const& thread : vThread) delete thread;
 }

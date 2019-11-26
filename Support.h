@@ -1,12 +1,8 @@
 #ifndef SUPPORT_H_
 #define SUPPORT_H_
 
-#include <Windows.h>
+#include "Windows.h"
 #include <iostream>
-#include <conio.h>
-#include <vector>
-#include <thread>
-#include <mutex>
 
 enum class Direction { UP, LEFT, DOWN, RIGHT, Count };
 enum class Type { CAR, TRUCK, DINOSAUR, BIRD, Count };

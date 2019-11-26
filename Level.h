@@ -17,6 +17,12 @@ public:
 	void run(const Screen& sc);
 
 private:
+	void resetPlayer();
+	void addThreadPlayer(std::vector<std::thread*>& vThread, const Screen& sc);
+	void addThreadLanes(std::vector<std::thread*>& vThread, const Screen& sc, 
+		unsigned& noLane);
+	void runThreads(std::vector<std::thread*>& vThread);
+
 	std::vector<Lane*> lanes;
 	Player* player;
 	State gameState;

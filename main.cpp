@@ -1,13 +1,4 @@
-#include "Player.h"
-#include "Light.h"
-#include "Dinosaur.h"
-#include "Screen.h"
-#include "Car.h"
-#include "Bird.h"
-#include "Truck.h"
-#include "Lane.h"
 #include "Level.h"
-#include <conio.h>
 
 int main() 
 {

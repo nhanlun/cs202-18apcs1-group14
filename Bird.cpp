@@ -1,5 +1,4 @@
 #include "Bird.h"
-#include <iostream>
 
 Bird::Bird(int x, int y) : Obstacle(x, y, 4, 4), figL(4), figR(4)
 {

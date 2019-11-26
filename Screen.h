@@ -24,6 +24,9 @@ private:
 
 	const int rightBorder = 120;
 	const int leftBorder = 10;
+
+	const int topBorder = 4;
+	const int botBorder = 43;
 };
 
 #endif

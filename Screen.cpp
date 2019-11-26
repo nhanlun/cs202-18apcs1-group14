@@ -1,4 +1,6 @@
 #include "Screen.h"
+#include <iostream>
+#include <conio.h>
 
 Screen::Screen()
 {
@@ -9,7 +11,7 @@ Screen::Screen()
 
 bool Screen::inScreen(int x, int y) const
 {
-	return (x >= leftBorder && x <= rightBorder && y >= 0 && y <= height - 1);
+	return (x >= leftBorder && x <= rightBorder && y >= topBorder && y <= botBorder);
 }
 
 int Screen::offset(int x, Direction dir) const
