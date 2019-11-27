@@ -36,13 +36,13 @@ void Player::move(Direction dir, const Screen& sc)
 		if (sc.inScreen(x, y - 8)) y -= 7;
 		break;
 	case Direction::LEFT:
-		if (sc.inScreen(x - 4, y)) x -= 2;
+		if (sc.inScreen(x - 3, y)) x -= 1;
 		break;
 	case Direction::DOWN:
 		if (sc.inScreen(x, y + 8)) y += 7;
 		break;
 	case Direction::RIGHT:
-		if (sc.inScreen(x + 4, y)) x += 2;
+		if (sc.inScreen(x + 3, y)) x += 1;
 		break;
 	default:;
 	}
@@ -55,9 +55,9 @@ bool Player::isAlive()
 	return alive;
 }
 
-bool Player::isImpact(Obstacle* obstacle) const
+bool Player::isImpact(Obstacle* obstacle, Direction dir) const
 {
-	return obstacle->isImpact(x, y);
+	return obstacle->isImpact(x, y, dir);
 }
 
 void Player::play(const Screen& sc, std::mutex* ioMtx, State& state)

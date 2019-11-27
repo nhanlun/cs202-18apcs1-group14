@@ -16,7 +16,7 @@ public:
 	void move(Direction dir, const Screen& sc);
 	void display();
 	bool isAlive();
-	bool isImpact(Obstacle* obstacle) const;
+	bool isImpact(Obstacle* obstacle, Direction dir) const;
 
 	void play(const Screen& sc, std::mutex* ioMtx, State& state);
 	void reset();

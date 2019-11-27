@@ -117,7 +117,7 @@ bool Lane::isImpact(int x)
 bool Lane::isImpact(Player* p) const
 {
 	for (auto& i : obstacles)
-		if (p->isImpact(i))
+		if (p->isImpact(i, dir))
 			return true;
 	return false;
 }

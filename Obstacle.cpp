@@ -30,9 +30,12 @@ void Obstacle::hide(Direction dir, const Screen& sc)
 		yaosu::printXY(column, row, ' ');
 }
 
-bool Obstacle::isImpact(int playerX, int playerY)
+bool Obstacle::isImpact(int playerX, int playerY, Direction dir)
 {
-	return (x - 1 < playerX && playerX < x + width &&
+	if (dir == Direction::LEFT)
+		return (x - 1 < playerX && playerX - 2 < x + width &&
+			y - 1 < playerY && playerY < y + height);
+	return (x - 3 < playerX && playerX < x + width && 
 		y - 1 < playerY && playerY < y + height);
 }
 

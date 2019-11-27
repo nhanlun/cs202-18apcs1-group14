@@ -13,7 +13,7 @@ public:
 
 	void move(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT) = 0;
-	bool isImpact(int playerX, int playerY);
+	bool isImpact(int playerX, int playerY, Direction dir);
 
 	bool outOfScreen(Direction dir, const Screen& sc);
 
