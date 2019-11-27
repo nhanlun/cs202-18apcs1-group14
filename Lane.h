@@ -12,7 +12,7 @@ class Lane
 public:
 	Lane(const Screen& sc, Direction _dir, Type _type, int _row, 
 		Color _clr = Color::DEFAULT, int spawn = 20, Speed _speed = Speed::SAFE, 
-		int _green = 500, int _red = 300);
+		int _green = 300, int _red = 150);
 	~Lane();
 	void run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p); // run the clock and update all the object of that lane
 
@@ -20,13 +20,14 @@ public:
 	bool isImpact(Player* p) const;
 
 private:
-	void randomObstacles();	//initialize random obstacles on lane
+	void randomObstacles(const Screen& sc);	//initialize random obstacles on lane
 	void spawnObstacles(const Screen& sc);
 	void moveObstacles(const Screen& sc, std::mutex* ioMtx);
 	void removeObstacles(const Screen& sc);
 	void lightManip(std::mutex* ioMtx);
 
-	Obstacle* obsFactory(const Screen& sc);
+	Obstacle* obsFactory(const Screen& sc); // spawn at initial position
+	Obstacle* obsFactory(int x); //spawn at position x
 	void changeLight(std::mutex* mtx);
 
 	Direction dir;

@@ -16,9 +16,6 @@ public:
 	void load();
 	void save();
 
-	void splashScreen();
-	void showMenu();
-
 private:
 	Screen sc;
 

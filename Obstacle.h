@@ -15,7 +15,6 @@ public:
 	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT) = 0;
 	bool isImpact(int playerX, int playerY);
 
-	void reset(); // reset obstacle to the starting position (xStart, yStart)
 	bool outOfScreen(Direction dir, const Screen& sc);
 
 	bool isImpact(int pos);
@@ -23,7 +22,6 @@ public:
 protected:
 	int x, y; //top-left corner
 	int width, height; //size of figures
-	int xStart, yStart;
 
 private:
 	void hide(Direction dir, const Screen& sc);

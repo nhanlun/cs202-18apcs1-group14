@@ -17,8 +17,8 @@ Level::Level(int noLevel, Screen& _sc, State& state) : lanes(2 * noLevel), gameS
 		else
 			speed = Speed(rand() % 4 + 1);
 
-		int spawnTime = 25;
-		if (type == Type::BIRD) spawnTime = 15;
+		int spawnTime = 35;
+		if (type == Type::BIRD) spawnTime = 20;
 		spawnTime *= int(speed);
 
 		lanes[index] = new Lane(_sc, dir, type, row, clr, spawnTime, speed);

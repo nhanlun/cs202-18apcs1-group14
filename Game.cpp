@@ -18,6 +18,7 @@ Game::~Game()
 void Game::run()
 {
 	yaosu::playThemeSong();
+	sc.splashScreen();
 	while (currentLevel < levels.size() && gameState != State::LOSE && gameState != State::STOP)
 	{
 		levels[currentLevel]->run(sc);

@@ -120,6 +120,7 @@ int Screen::getLeftBorder() const
 
 void Screen::displayMap() const
 {
+	yaosu::color(15);
 	char pavement = 177;
 	int row = 4;
 	

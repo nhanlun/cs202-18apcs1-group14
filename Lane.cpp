@@ -16,9 +16,9 @@ Lane::~Lane()
 
 void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 {
+	randomObstacles(sc);
 	while (state == State::RUN)
 	{
-		randomObstacles();
 		spawnObstacles(sc);
 		moveObstacles(sc, ioMtx);
 		lightManip(ioMtx);
@@ -31,9 +31,38 @@ void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 	}
 }
 
-void Lane::randomObstacles()
+void Lane::randomObstacles(const Screen& sc)
 {
-
+	if (dir == Direction::LEFT)
+	{
+		int x = sc.getRightBorder();
+		while (x > sc.getLeftBorder())
+		{
+			x -= spawnTime / (int)speed;
+		}
+		x += spawnTime / (int)speed;
+		while (x <= sc.getRightBorder())
+		{
+			Obstacle* tmp = obsFactory(x);
+			if (tmp) obstacles.push_back(tmp);
+			x += spawnTime / (int)speed;
+		}
+	}
+	else
+	{
+		int x = sc.getLeftBorder();
+		while (x < sc.getRightBorder())
+		{
+			x += spawnTime / (int)speed;
+		}
+		x -= spawnTime / (int)speed;
+		while (x >= sc.getLeftBorder())
+		{
+			Obstacle* tmp = obsFactory(x);
+			if (tmp) obstacles.push_back(tmp);
+			x -= spawnTime / (int)speed;
+		}
+	}
 }
 
 void Lane::spawnObstacles(const Screen& sc)
@@ -99,6 +128,11 @@ Obstacle* Lane::obsFactory(const Screen& sc)
 	if (dir == Direction::LEFT) x = sc.getRightBorder();
 	else x = sc.getLeftBorder();
 
+	return obsFactory(x);
+}
+
+Obstacle* Lane::obsFactory(int x)
+{
 	switch (obsType)
 	{
 	case Type::BIRD:

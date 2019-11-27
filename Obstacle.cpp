@@ -1,10 +1,9 @@
 #include "Obstacle.h"
 
-Obstacle::Obstacle(int w, int h) : x(0), y(0), width(w), height(h), xStart(0), 
-	yStart(0) {}
+Obstacle::Obstacle(int w, int h) : x(0), y(0), width(w), height(h) {}
 
 Obstacle::Obstacle(int _x, int _y, int w, int h) : x(_x), y(_y), width(w), 
-	height(h), xStart(_x), yStart(_y) {}
+	height(h) {}
 
 Obstacle::~Obstacle() {}
 
@@ -35,12 +34,6 @@ bool Obstacle::isImpact(int playerX, int playerY)
 {
 	return (x - 1 < playerX && playerX < x + width &&
 		y - 1 < playerY && playerY < y + height);
-}
-
-void Obstacle::reset()
-{
-	x = xStart;
-	y = yStart;
 }
 
 bool Obstacle::outOfScreen(Direction dir, const Screen& sc)
