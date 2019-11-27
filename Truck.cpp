@@ -1,58 +1,34 @@
 #include "Truck.h"
 
-Truck::Truck() :Obstacle(16, 4)
+Truck::Truck() :Obstacle(16, 4), figL(4), figR(4)
 {
 	char a = 196;
-	std::string tmp = (char)218 + a + a + a + a + a + a + a + a + (char)191 + "____  ";
-	figR.push_back(tmp);
-	figR.push_back("|  ___   |___ \\ ");
-	figR.push_back("|_/ _ \\==/ _ \\_]");
-	figR.push_back("  \\___/  \\___/  ");
+	std::string tmp = "";
+	tmp = tmp + (char)218 + a + a + a + a + a + a + a + a + (char)191 + "____  ";
+	figR[0] = tmp;
+	figR[1] = "|  ___   |___ \\ ";
+	figR[2] = "|_/ _ \\==/ _ \\_]";
+	figR[3] = "  \\___/  \\___/  ";
 
 	tmp.clear();
 	tmp = tmp + "  ____" + (char)218 + a + a + a + a + a + a + a + a + (char)191;
-	figL.push_back(tmp);
-	figL.push_back(" / ___|   ___  |");
-	figL.push_back("[_/ _ \\==/ _ \\_|");
-	figL.push_back("  \\___/  \\___/  ");
+	figL[0] = tmp;
+	figL[1] = " / ___|   ___  |";
+	figL[2] = "[_/ _ \\==/ _ \\_|";
+	figL[3] = "  \\___/  \\___/  ";
 }
 
-Truck::Truck(int x, int y):Obstacle(x,y,16,4)
+Truck::Truck(int x, int y): Truck()
 {
-	char a = 196;
-	std::string tmp;
-	tmp = tmp + (char)218 + a + a + a + a + a + a + a + a + (char)191 + "____  ";
-	figR.push_back(tmp);
-	figR.push_back("|  ___   |___ \\ ");
-	figR.push_back("|_/ _ \\==/ _ \\_]");
-	figR.push_back("  \\___/  \\___/  ");
-
-	tmp.clear();
-	tmp = tmp + "  ____" + (char)218 + a + a + a + a + a + a + a + a + (char)191;
-	figL.push_back(tmp);
-	figL.push_back(" / ___|   ___  |");
-	figL.push_back("[_/ _ \\==/ _ \\_|");
-	figL.push_back("  \\___/  \\___/  ");
+	this->x = x;
+	this->y = y;
 }
 
-Truck::Truck(int border, int y, Direction dir) : Obstacle(border, y, 16, 4)
+Truck::Truck(int border, int y, Direction dir) : Truck()
 {
-	if (dir == Direction::RIGHT) x -= (width - 1);
-
-	char a = 196;
-	std::string tmp;
-	tmp = tmp + (char)218 + a + a + a + a + a + a + a + a + (char)191 + "____  ";
-	figR.push_back(tmp);
-	figR.push_back("|  ___   |___ \\ ");
-	figR.push_back("|_/ _ \\==/ _ \\_]");
-	figR.push_back("  \\___/  \\___/  ");
-
-	tmp.clear();
-	tmp = tmp + "  ____" + (char)218 + a + a + a + a + a + a + a + a + (char)191;
-	figL.push_back(tmp);
-	figL.push_back(" / ___|   ___  |");
-	figL.push_back("[_/ _ \\==/ _ \\_|");
-	figL.push_back("  \\___/  \\___/  ");
+	this->x = border;
+	this->y = y;
+	if (dir == Direction::RIGHT) this->x -= (width - 1);
 }
 
 void Truck::display(Direction dir, const Screen& sc, Color color)

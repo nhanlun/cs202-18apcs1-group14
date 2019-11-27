@@ -1,32 +1,29 @@
 #include "Bird.h"
 
-Bird::Bird(int x, int y) : Obstacle(x, y, 4, 4), figL(4), figR(4)
+Bird::Bird() : Obstacle(4, 4), figL(4), figR(4)
 {
 	figL[0] = " _  ";
 	figL[1] = ">^) ";
 	figL[2] = "/V\\ ";
 	figL[3] = "(_)>";
-	
+
 	figR[0] = "  _ ";
 	figR[1] = " (^<";
 	figR[2] = " /V\\";
 	figR[3] = "<(_)";
-	
 }
 
-Bird::Bird(int border, int y, Direction dir) : Obstacle(border, y, 4, 4), figL(4), figR(4)
+Bird::Bird(int x, int y) : Bird()
 {
-	if (dir == Direction::RIGHT) x -= (width - 1);
+	this->x = x;
+	this->y = y;
+}
 
-	figL[0] = " _  ";
-	figL[1] = ">^) ";
-	figL[2] = "/V\\ ";
-	figL[3] = "(_)>";
-
-	figR[0] = "  _ ";
-	figR[1] = " (^<";
-	figR[2] = " /V\\";
-	figR[3] = "<(_)";
+Bird::Bird(int border, int y, Direction dir) : Bird()
+{
+	this->x = border;
+	this->y = y;
+	if (dir == Direction::RIGHT) this->x -= (width - 1);
 }
 
 void Bird::display(Direction dir, const Screen& sc, Color color)
@@ -81,3 +78,5 @@ void Bird::display(Direction dir, const Screen& sc, Color color)
 	std::cout << line4;
 	yaosu::color(int(Color::DEFAULT));
 }
+
+

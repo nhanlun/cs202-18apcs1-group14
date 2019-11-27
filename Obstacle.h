@@ -8,7 +8,6 @@ class Obstacle
 {
 public:
 	Obstacle(int w, int h);
-	Obstacle(int _x, int _y, int w, int h);
 	virtual ~Obstacle();
 
 	void move(Direction dir, const Screen& sc, Color color = Color::DEFAULT);

@@ -8,11 +8,11 @@
 class Truck : public Obstacle
 {
 public:
-	Truck();
 	Truck(int x, int y);
 	Truck(int border, int y, Direction dir);
 	void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 private:
+	Truck();
 	std::vector<std::string> figL;
 	std::vector<std::string> figR;
 };

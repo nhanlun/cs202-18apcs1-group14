@@ -1,6 +1,6 @@
 #include "Dinosaur.h"
 
-Dinosaur::Dinosaur(int x, int y) : Obstacle(x, y, 14, 4), figL(4), figR(4)
+Dinosaur::Dinosaur() : Obstacle(14, 4), figL(4), figR(4)
 {
 	figL[0] = " __           ";
 	figL[1] = "(_^\\-^^^-.    ";
@@ -13,19 +13,17 @@ Dinosaur::Dinosaur(int x, int y) : Obstacle(x, y, 14, 4), figL(4), figR(4)
 	figR[3] = "<__.|_|-|_|   ";
 }
 
-Dinosaur::Dinosaur(int border, int y, Direction dir) : Obstacle(border, y, 14, 4), figL(4), figR(4)
+Dinosaur::Dinosaur(int x, int y) : Dinosaur()
 {
-	if (dir == Direction::RIGHT) x -= (width - 1);
+	this->x = x;
+	this->y = y;
+}
 
-	figL[0] = " __           ";
-	figL[1] = "(_^\\-^^^-.    ";
-	figL[2] = "  \\       \\__ ";
-	figL[3] = "   |_|-|_|.__>";
-
-	figR[0] = "           __ ";
-	figR[1] = "    .-^^^-/^_)";
-	figR[2] = " __/       /  ";
-	figR[3] = "<__.|_|-|_|   ";
+Dinosaur::Dinosaur(int border, int y, Direction dir) : Dinosaur()
+{
+	this->x = border;
+	this->y = y;
+	if (dir == Direction::RIGHT) this->x -= (width - 1);
 }
 
 void Dinosaur::display(Direction dir, const Screen& sc, Color color)
@@ -80,3 +78,4 @@ void Dinosaur::display(Direction dir, const Screen& sc, Color color)
 	std::cout << line4;
 	yaosu::color(int(Color::DEFAULT));
 }
+

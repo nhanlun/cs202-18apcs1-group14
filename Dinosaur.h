@@ -13,6 +13,7 @@ public:
 	virtual void display(Direction dir, const Screen& sc, Color color = Color::DEFAULT);
 
 private:
+	Dinosaur();
 	std::vector<std::string> figL;
 	std::vector<std::string> figR;
 };

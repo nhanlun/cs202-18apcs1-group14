@@ -1,44 +1,29 @@
 #include "Car.h"
 
-Car::Car() : Obstacle(16, 4)
+Car::Car() : Obstacle(16, 4), figL(4), figR(4)
 {
-	figR.push_back("    ______        ");
-	figR.push_back(" __/   |##\\___    ");
-	figR.push_back("[/ _ \\====/ _ \\]");
-	figR.push_back(" \\___/    \\___/ ");
+	figR[0] = "    ______       ";
+	figR[1] = " __/   |##\\___  ";
+	figR[2] = "[/ _ \\====/ _ \\]";
+	figR[3] = " \\___/    \\___/ ";
 
-	figL.push_back("      _______    ");
-	figL.push_back("  ___/##|   \\__  ");
-	figL.push_back("[/ _ \\====/ _ \\]");
-	figL.push_back(" \\___/    \\___/ ");
+	figL[0] = "      ______     ";
+	figL[1] = "  ___/##|   \\__ ";
+	figL[2] = "[/ _ \\====/ _ \\]";
+	figL[3] = " \\___/    \\___/ ";
 }
 
-Car::Car(int x, int y):Obstacle(x,y,16,4)
+Car::Car(int x, int y) : Car()
 {
-	figR.push_back("    ______        ");
-	figR.push_back(" __/   |##\\___    ");
-	figR.push_back("[/ _ \\====/ _ \\]");
-	figR.push_back(" \\___/    \\___/ ");
-
-	figL.push_back("      ______    ");
-	figL.push_back("  ___/##|   \\__  ");
-	figL.push_back("[/ _ \\====/ _ \\]");
-	figL.push_back(" \\___/    \\___/ ");
+	this->x = x;
+	this->y = y;
 }
 
-Car::Car(int border, int y, Direction dir) : Obstacle(border, y, 16, 4)
+Car::Car(int border, int y, Direction dir) : Car()
 {
-	if (dir == Direction::RIGHT) x -= (width - 1);
-
-	figR.push_back("    ______        ");
-	figR.push_back(" __/   |##\\___    ");
-	figR.push_back("[/ _ \\====/ _ \\]");
-	figR.push_back(" \\___/    \\___/ ");
-
-	figL.push_back("      ______    ");
-	figL.push_back("  ___/##|   \\__  ");
-	figL.push_back("[/ _ \\====/ _ \\]");
-	figL.push_back(" \\___/    \\___/ ");
+	this->x = border;
+	this->y = y;
+	if (dir == Direction::RIGHT) this->x -= (width - 1);
 }
 
 void Car::display(Direction dir, const Screen& sc, Color color)

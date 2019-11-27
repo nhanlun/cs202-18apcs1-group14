@@ -27,7 +27,7 @@ void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 		//Count the clock
 		if (trafficLight->isGreen()) ++time;
 		++lightClock;
-		Sleep(30);
+		Sleep(50);
 	}
 }
 
