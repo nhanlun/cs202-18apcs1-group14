@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(int noLevel, Screen& _sc) : lanes(2 * noLevel), gameState(State::RUN)
+Level::Level(int noLevel, Screen& _sc, State& state) : lanes(2 * noLevel), gameState(state)
 {
 	player = new Player(15, 41);
 

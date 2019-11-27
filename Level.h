@@ -11,7 +11,7 @@
 class Level
 {
 public:
-	Level(int noLevel, Screen& sc);
+	Level(int noLevel, Screen& sc, State& state);
 	~Level();
 
 	void run(const Screen& sc);
@@ -25,7 +25,7 @@ private:
 
 	std::vector<Lane*> lanes;
 	Player* player;
-	State gameState;
+	State& gameState;
 
 	std::mutex ioMtx;
 	std::mutex stateMtx;

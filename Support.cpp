@@ -82,4 +82,8 @@ namespace yaosu
 		if (!SetConsoleWindowInfo(h, TRUE, &info))
 			throw std::runtime_error("Unable to resize window after resizing buffer.");
 	}
+	void playThemeSong()
+	{
+		PlaySound(TEXT("cs202-18apcs1-group14/Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);
+	}
 }

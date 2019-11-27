@@ -3,6 +3,8 @@
 
 #include "Level.h"
 #include <vector>
+#include "Support.h"
+#include <MMSystem.h>
 
 class Game
 {
@@ -22,6 +24,7 @@ private:
 
 	std::vector<Level*> levels;
 	int currentLevel;
+	State gameState;
 };
 
 #endif

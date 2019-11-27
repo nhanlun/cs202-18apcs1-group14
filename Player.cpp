@@ -90,6 +90,8 @@ void Player::play(const Screen& sc, std::mutex* ioMtx, State& state)
 			}
 			ioMtx->unlock();
 		}
+
+		Sleep(80);
 	}
 }
 

@@ -1,10 +1,9 @@
-#include "Level.h"
+#include "Game.h"
 
-int main() 
+int main()
 {
-	srand(time(NULL));
-	Screen sc;
-	Level level(10, sc);
-	level.run(sc);
+	Game game;
+	game.run();
+	system("pause");
 	return 0;
 }
