@@ -1,6 +1,7 @@
 #include "Screen.h"
 #include <iostream>
 #include <conio.h>
+#include <string>
 
 Screen::Screen()
 {
@@ -107,6 +108,23 @@ void Screen::menuScreen()
 
 }
 
+void Screen::levelDisplay(int noLevel)
+{
+	yaosu::printCenter(rightBorder, width, "Level: " + std::to_string(noLevel), 18);
+}
+
+void Screen::tutorialScreen()
+{
+	yaosu::printCenter(rightBorder, width, "TUTORIAL", 20);
+	yaosu::printCenter(rightBorder, width, "------------", 21);
+	yaosu::printCenter(rightBorder, width, "W, A, S, D: Move", 23);
+	yaosu::printCenter(rightBorder, width, "K: Save Game", 25);
+	yaosu::printCenter(rightBorder, width, "L: Load Game", 27);
+	yaosu::printCenter(rightBorder, width, "P: Pause Game", 29);
+	yaosu::printCenter(rightBorder, width, "R: Resume Game", 31);
+	yaosu::printCenter(rightBorder, width, "ESC: Escape", 33);
+}
+
 Light* Screen::lightFactory(Direction dir, int row) const
 {
 	if (dir == Direction::LEFT) return new Light(leftBorder, row - 1, false);
@@ -175,4 +193,25 @@ void Screen::displayMap() const
 int Screen::getRightBorder() const
 {
 	return rightBorder;
+}
+
+
+void Screen::eraseMap() const
+{
+	std::string blankLine(rightBorder - leftBorder + 1, ' ');
+	for (int row = topBorder; row <= botBorder; ++row)
+	{
+		yaosu::gotoXY(leftBorder, row);
+		std::cout << blankLine;
+	}
+}
+
+void Screen::eraseRightPanel() const
+{
+	std::string blankLine(width - rightBorder - 1, ' ');
+	for (int row = 0; row < height; ++row)
+	{
+		yaosu::gotoXY(rightBorder + 1, row);
+		std::cout << blankLine;
+	}
 }

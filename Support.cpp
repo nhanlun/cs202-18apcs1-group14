@@ -82,6 +82,15 @@ namespace yaosu
 		if (!SetConsoleWindowInfo(h, TRUE, &info))
 			throw std::runtime_error("Unable to resize window after resizing buffer.");
 	}
+
+	void printCenter(int left, int right, std::string content, int row, Color c)
+	{
+		color(int(c));
+		gotoXY((left + right - content.size()) / 2, row);
+		std::cout << content;
+		color(int(Color::DEFAULT));
+	}
+
 	void playThemeSong()
 	{
 		PlaySound(TEXT("Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);

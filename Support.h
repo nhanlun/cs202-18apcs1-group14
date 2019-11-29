@@ -29,6 +29,7 @@ namespace yaosu
 	void color(int code);
 	void printXY(short x, short y, char c, int colorCode = int(Color::DEFAULT));
 	void setWindow();
+	void printCenter(int left, int right, std::string content, int row, Color c = Color::DEFAULT);
 	void playThemeSong();
 	//void ambulance();
 }

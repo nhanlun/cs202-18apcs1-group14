@@ -37,7 +37,7 @@ void Level::run(const Screen& sc)
 
 	while (noLane <= lanes.size())
 	{
-		system("cls");
+		sc.eraseMap();
 		sc.displayMap();
 		resetPlayer();
 
@@ -49,10 +49,6 @@ void Level::run(const Screen& sc)
 		if (gameState == State::LOSE) break;
 		else if (gameState == State::STOP) break;
 	}
-
-	yaosu::gotoXY(150, 15);
-	if (gameState == State::WIN) std::cout << "YOU WIN";
-	else if (gameState == State::LOSE) std::cout << "YOU LOSE";
 }
 
 void Level::resetPlayer()

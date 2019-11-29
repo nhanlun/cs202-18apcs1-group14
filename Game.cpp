@@ -19,8 +19,10 @@ void Game::run()
 {
 	//yaosu::playThemeSong();
 	//sc.splashScreen();
+	sc.tutorialScreen();
 	while (currentLevel < levels.size() && gameState != State::LOSE && gameState != State::STOP)
 	{
+		sc.levelDisplay(currentLevel);
 		levels[currentLevel]->run(sc);
 		++currentLevel;
 	}
