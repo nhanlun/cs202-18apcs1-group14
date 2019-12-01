@@ -17,16 +17,19 @@ Lane::~Lane()
 void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 {
 	randomObstacles(sc);
-	while (state == State::RUN)
+	while (state == State::RUN || state == State::PAUSE)
 	{
-		spawnObstacles(sc);
-		moveObstacles(sc, ioMtx);
-		lightManip(ioMtx);
-		if (isImpact(p)) state = State::LOSE;
+		if (state == State::RUN)
+		{
+			spawnObstacles(sc);
+			moveObstacles(sc, ioMtx);
+			lightManip(ioMtx);
+			if (isImpact(p)) state = State::LOSE;
 
-		//Count the clock
-		if (trafficLight->isGreen()) ++time;
-		++lightClock;
+			//Count the clock
+			if (trafficLight->isGreen()) ++time;
+			++lightClock;
+		}
 		Sleep(50);
 	}
 }

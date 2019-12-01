@@ -19,7 +19,7 @@ enum class Speed
 };
 enum class State
 {
-	RUN, STOP, PAUSE, WIN, LOSE
+	RUN, STOP, PAUSE, WIN, LOSE, SAVE
 };
 
 namespace yaosu

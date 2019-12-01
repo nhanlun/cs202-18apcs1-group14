@@ -113,16 +113,22 @@ void Screen::levelDisplay(int noLevel)
 	yaosu::printCenter(rightBorder, width, "Level: " + std::to_string(noLevel+1), 18);
 }
 
-void Screen::tutorialScreen()
+void Screen::runScreen() const
 {
 	yaosu::printCenter(rightBorder, width, "TUTORIAL", 20);
 	yaosu::printCenter(rightBorder, width, "------------", 21);
 	yaosu::printCenter(rightBorder, width, "W, A, S, D: Move", 23);
-	yaosu::printCenter(rightBorder, width, "K: Save Game", 25);
-	yaosu::printCenter(rightBorder, width, "L: Load Game", 27);
-	yaosu::printCenter(rightBorder, width, "P: Pause Game", 29);
-	yaosu::printCenter(rightBorder, width, "R: Resume Game", 31);
-	yaosu::printCenter(rightBorder, width, "ESC: Escape", 33);
+	yaosu::printCenter(rightBorder, width, "P: Pause Game ", 25);
+	yaosu::printCenter(rightBorder, width, "                      ", 27);
+}
+
+void Screen::pauseScreen() const
+{
+	yaosu::printCenter(rightBorder, width, "TUTORIAL", 20);
+	yaosu::printCenter(rightBorder, width, "------------", 21);
+	yaosu::printCenter(rightBorder, width, "  S: Save Game  ", 23);
+	yaosu::printCenter(rightBorder, width, "R: Resume Game", 25);
+	yaosu::printCenter(rightBorder, width, "ESC: Back To Main Menu", 27);
 }
 
 Light* Screen::lightFactory(Direction dir, int row) const

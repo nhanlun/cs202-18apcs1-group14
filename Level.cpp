@@ -7,7 +7,6 @@ Level::Level(int noLevel, Screen& _sc, State& state) : lanes(2 * noLevel), gameS
 	for (unsigned index = 0; index < lanes.size(); ++index)
 	{
 		Direction dir = Direction(3 - (index % 2) * 2);
-		//Type type = Type(rand() % int(Type::Count));
 		Type type = Type(rand() % int(Type::Count));
 		int row = 32 - 7 * (index % 4);
 		Color clr = Color(rand() % 9 + 7);
@@ -47,8 +46,7 @@ void Level::run(const Screen& sc)
 		addThreadLanes(vThread, sc, noLane);
 		runThreads(vThread);
 
-		if (gameState == State::LOSE) break;
-		else if (gameState == State::STOP) break;
+		if (gameState != State::WIN) break;
 	}
 }
 

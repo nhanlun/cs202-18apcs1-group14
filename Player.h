@@ -24,6 +24,10 @@ public:
 private:
 	void hide();
 
+	void runMode(const Screen& sc, std::mutex* ioMtx, State& state);
+	void pauseMode(const Screen& sc, std::mutex* ioMtx, State& state);
+	void saveMode(const Screen& sc, std::mutex* ioMtx, State& state);
+
 	int x, y; //center of 3x3
 	bool alive;
 };

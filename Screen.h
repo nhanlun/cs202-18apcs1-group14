@@ -15,7 +15,8 @@ public:
 	void splashScreen();
 	void menuScreen();
 	void levelDisplay(int noLevel);
-	void tutorialScreen();
+	void runScreen() const;
+	void pauseScreen() const;
 	
 	Light* lightFactory(Direction dir, int row) const; //create traffic light base on lane row and direction
 

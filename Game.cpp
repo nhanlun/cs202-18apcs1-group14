@@ -19,16 +19,20 @@ void Game::run()
 {
 	//yaosu::playThemeSong();
 	//sc.splashScreen();
-	sc.tutorialScreen();
+	sc.runScreen();
 	while (currentLevel < (int)levels.size())
 	{
 		sc.levelDisplay(currentLevel);
 		levels[currentLevel]->run(sc);
-		if (gameState == State::LOSE || gameState == State::STOP)
+
+		if (gameState != State::WIN)
+		{
+			if (gameState == State::SAVE) save();
 			break;
+		}
+		
 		++currentLevel;
 	}
-	save();
 }
 
 void Game::load()
