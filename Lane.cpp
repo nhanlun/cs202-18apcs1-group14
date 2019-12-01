@@ -122,6 +122,16 @@ bool Lane::isImpact(Player* p) const
 	return false;
 }
 
+void Lane::save(std::ofstream & fo)
+{
+	fo << (int)dir << '\n';
+	fo << (int)obsType<<'\n';
+	fo << row << '\n';
+	fo << (int)obsColor << '\n';
+	fo << spawnTime << '\n';
+	fo << (int)speed << '\n';
+}
+
 Obstacle* Lane::obsFactory(const Screen& sc)
 {
 	int x = 0;

@@ -110,7 +110,7 @@ void Screen::menuScreen()
 
 void Screen::levelDisplay(int noLevel)
 {
-	yaosu::printCenter(rightBorder, width, "Level: " + std::to_string(noLevel), 18);
+	yaosu::printCenter(rightBorder, width, "Level: " + std::to_string(noLevel+1), 18);
 }
 
 void Screen::tutorialScreen()

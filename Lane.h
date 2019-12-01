@@ -6,6 +6,7 @@
 #include "Truck.h"
 #include "Dinosaur.h"
 #include "Player.h"
+#include <fstream>
 
 class Lane
 {
@@ -18,6 +19,7 @@ public:
 
 	bool isImpact(int x);
 	bool isImpact(Player* p) const;
+	void save(std::ofstream& fo);
 
 private:
 	void randomObstacles(const Screen& sc);	//initialize random obstacles on lane

@@ -4,9 +4,10 @@
 #include "Windows.h"
 #include <MMSystem.h>
 #include <iostream>
+#include <string>
 
-enum class Direction { UP, LEFT, DOWN, RIGHT, Count };
-enum class Type { CAR, TRUCK, DINOSAUR, BIRD, Count };
+enum class Direction { UP = 0, LEFT = 1, DOWN = 2, RIGHT = 3, Count };
+enum class Type { CAR = 0, TRUCK = 1, DINOSAUR = 2, BIRD = 3, Count };
 enum class Color 
 {
 	DEFAULT = 7, GREY = 8, BLUE = 9, GREEN = 10, CYAN = 11, 
@@ -14,7 +15,7 @@ enum class Color
 };
 enum class Speed
 {
-	FAST = 1, AVERAGE, SAFE, SLOW
+	FAST = 1, AVERAGE = 2, SAFE = 3, SLOW = 4
 };
 enum class State
 {
@@ -31,6 +32,7 @@ namespace yaosu
 	void setWindow();
 	void printCenter(int left, int right, std::string content, int row, Color c = Color::DEFAULT);
 	void playThemeSong();
+	std::string getStringOf(Type t);// for debug purpose
 	//void ambulance();
 }
 

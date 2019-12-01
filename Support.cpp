@@ -95,4 +95,38 @@ namespace yaosu
 	{
 		PlaySound(TEXT("Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);
 	}
+
+	std::string getStringOf(Type t)
+	{
+		std::string tmp;
+		switch (t)
+		{
+		case(Type::BIRD):
+		{	
+			tmp = "BIRD";
+			break;
+		}
+		case(Type::CAR):
+		{
+			tmp = "CAR";
+			break;
+		}
+		case(Type::DINOSAUR):
+		{
+			tmp = "DINOSAUR";
+			break;
+		}
+		case(Type::TRUCK):
+		{
+			tmp = "TRUCK";
+			break;
+		}
+		default:
+		{
+			tmp = "Mistake";
+			break;
+		}
+		}
+		return tmp;
+	}
 }

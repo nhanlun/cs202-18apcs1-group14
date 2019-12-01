@@ -15,6 +15,7 @@ public:
 	~Level();
 
 	void run(const Screen& sc);
+	void save(std::ofstream& fo);
 
 private:
 	void resetPlayer();
