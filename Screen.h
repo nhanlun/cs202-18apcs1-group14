@@ -13,7 +13,7 @@ public:
 	int offset(int x, Direction dir) const; //num of pixels to remove to fit the screen
 	
 	void splashScreen();
-	void menuScreen();
+	int menuScreen(); // 0: new game, 1 : load game, 2 : settings, 3 : exit
 	void levelDisplay(int noLevel);
 	void runScreen() const;
 	void pauseScreen() const;
@@ -28,6 +28,13 @@ public:
 	void eraseRightPanel() const;
 
 private:
+
+	void displayCursor();
+	void moveCursor(int x, int& cur);
+
+	void drawBorder();
+	void drawCrossyRoad(int x, int y); // draw the figure crossy road with sleep x, color y
+
 	const int width = 213;
 	const int height = 50;
 

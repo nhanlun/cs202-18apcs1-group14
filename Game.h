@@ -15,6 +15,7 @@ public:
 	void run();
 	void load();
 	void save();
+	void play();
 
 private:
 	Screen sc;

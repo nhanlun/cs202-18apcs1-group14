@@ -17,22 +17,9 @@ Game::~Game()
 
 void Game::run()
 {
-	//yaosu::playThemeSong();
-	//sc.splashScreen();
-	sc.runScreen();
-	while (currentLevel < (int)levels.size())
-	{
-		sc.levelDisplay(currentLevel);
-		levels[currentLevel]->run(sc);
-
-		if (gameState != State::WIN)
-		{
-			if (gameState == State::SAVE) save();
-			break;
-		}
-		
-		++currentLevel;
-	}
+	yaosu::playThemeSong();
+	sc.splashScreen();
+	int action = sc.menuScreen();
 }
 
 void Game::load()
@@ -64,4 +51,22 @@ void Game::save()
 	for (auto& i : levels)
 		i->save(fo);
 	fo.close();
+}
+
+void Game::play()
+{
+	sc.runScreen();
+	while (currentLevel < (int)levels.size())
+	{
+		sc.levelDisplay(currentLevel);
+		levels[currentLevel]->run(sc);
+
+		if (gameState != State::WIN)
+		{
+			if (gameState == State::SAVE) save();
+			break;
+		}
+
+		++currentLevel;
+	}
 }

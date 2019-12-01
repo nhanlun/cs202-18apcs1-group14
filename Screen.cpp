@@ -27,38 +27,11 @@ void Screen::splashScreen()
 	using yaosu::color;
 	using std::cout;
 
-	color(3);
-
-	gotoXY(10, 5);
-	cout << (char)201;
-	for (int i = 11; i <= 201; ++i) cout << (char)205;
-	cout << (char)187;
-
-	for (int i = 6; i <= 43; ++i)
-	{
-		gotoXY(10, i);
-		cout << (char)186;
-		gotoXY(202, i);
-		cout << (char)186;
-	}
-
-	gotoXY(10, 44);
-	cout << (char)200;
-	for (int i = 11; i <= 201; ++i) cout << (char)205;
-	cout << (char)188;
-
-	color(10);
+	drawBorder();
 	
-	int x = 200;
+	int x = 120;
 
-	Sleep(x);
-	gotoXY(49, 10); cout << " ------    -----       -----     ------   ------   \\     /          -----       -----          /\\         -----\\"; Sleep(x);
-	gotoXY(49, 11); cout << "|         |     |     |     |   |        |          \\   /          |     |     |     |        /  \\        |     \\"; Sleep(x);
-	gotoXY(49, 12); cout << "|         |     |     |     |   |        |           \\ /           |     |     |     |       /    \\       |      \\"; Sleep(x);
-	gotoXY(49, 13); cout << "|         |-----      |     |    -----    -----       |            |-----      |     |      /------\\      |      |"; Sleep(x);
-	gotoXY(49, 14); cout << "|         |     \\     |     |         |        |      |            |     \\     |     |     /        \\     |      /"; Sleep(x);
-	gotoXY(49, 15); cout << "|         |      \\    |     |         |        |      |            |      \\    |     |    /          \\    |     /"; Sleep(x);
-	gotoXY(49, 16); cout << " ------   |       \\    -----    ------   ------       |            |       \\    -----    /            \\   -----/"; Sleep(x);
+	drawCrossyRoad(x, 10);
 
 	color(14);
 
@@ -86,26 +59,71 @@ void Screen::splashScreen()
 	{
 		Sleep(x);
 		if (i % 2)
-			color(10);
+			drawCrossyRoad(x, 10);
 		else
-			color(15);
-		gotoXY(49, 10); cout << " ------    -----       -----     ------   ------   \\     /          -----       -----          /\\         -----\\"; Sleep(x);
-		gotoXY(49, 11); cout << "|         |     |     |     |   |        |          \\   /          |     |     |     |        /  \\        |     \\"; Sleep(x);
-		gotoXY(49, 12); cout << "|         |     |     |     |   |        |           \\ /           |     |     |     |       /    \\       |      \\"; Sleep(x);
-		gotoXY(49, 13); cout << "|         |-----      |     |    -----    -----       |            |-----      |     |      /------\\      |      |"; Sleep(x);
-		gotoXY(49, 14); cout << "|         |     \\     |     |         |        |      |            |     \\     |     |     /        \\     |      /"; Sleep(x);
-		gotoXY(49, 15); cout << "|         |      \\    |     |         |        |      |            |      \\    |     |    /          \\    |     /"; Sleep(x);
-		gotoXY(49, 16); cout << " ------   |       \\    -----    ------   ------       |            |       \\    -----    /            \\   -----/"; Sleep(x);
+			drawCrossyRoad(x, 15);
 	}
 
-	gotoXY(93, 32); cout << "Press any key to continue";
+	gotoXY(93, 32); //cout << "Press any key to continue";
+	system("pause");
 
-	char tmp = _getch();
+	//char tmp = _getch();
 }
 
-void Screen::menuScreen()
+int Screen::menuScreen()
 {
+	using yaosu::color;
+	using yaosu::gotoXY;
+	using std::cout;
 
+	drawBorder();
+	drawCrossyRoad(0, 10);
+
+	color(11);
+	gotoXY(41, 22); cout << "    ______        ";
+	gotoXY(41, 23); cout << " __/   |##\\___    ";
+	gotoXY(41, 24); cout << "[/ _ \\====/ _ \\]";
+	gotoXY(41, 25); cout << " \\___/    \\___/ ";
+
+	color(11);
+	gotoXY(155, 22); cout << " __           ";
+	gotoXY(155, 23); cout << "(_^\\-^^^-.    ";
+	gotoXY(155, 24); cout << "  \\       \\__ ";
+	gotoXY(155, 25); cout << "   |_|-|_|.__>";
+
+	gotoXY(97, 24); cout << "                    "; 
+	gotoXY(97, 25); cout << "                    ";
+	gotoXY(97, 26); cout << "                    "; 
+	gotoXY(97, 27); cout << "                    "; 
+
+	gotoXY(102, 24); cout << "New game";
+	gotoXY(102, 25); cout << "Load game";
+	gotoXY(102, 26); cout << "Settings";
+	gotoXY(102, 27); cout << "Exit";
+
+	displayCursor();
+	int cur = 24;
+	int option[] = { 0, 1, 2, 3 };
+	while (1)
+	{
+		if (_kbhit())
+		{
+			char cmd = _getch();
+			switch (cmd)
+			{
+			case 'w':
+				moveCursor(-1, cur);
+				break;
+			case 's':
+				moveCursor(1, cur);
+				break;
+			case ' ':
+				return option[cur - 24];
+			default:
+				break;
+			}
+		}
+	}
 }
 
 void Screen::levelDisplay(int noLevel)
@@ -220,4 +238,68 @@ void Screen::eraseRightPanel() const
 		yaosu::gotoXY(rightBorder + 1, row);
 		std::cout << blankLine;
 	}
+}
+
+void Screen::displayCursor()
+{
+	yaosu::gotoXY(98, 24); std::cout << '>';
+}
+
+void Screen::moveCursor(int x, int& cur)
+{
+	using yaosu::gotoXY;
+	using std::cout;
+	int tmp = cur + x;
+	if (tmp >= 24 && tmp <= 27)
+	{
+		gotoXY(98, cur);
+		cout << ' ';
+		gotoXY(98, tmp);
+		cout << '>';
+		cur = tmp;
+	}
+}
+
+void Screen::drawBorder()
+{
+	using yaosu::color;
+	using yaosu::gotoXY;
+	using std::cout;
+	color(3);
+
+	gotoXY(10, 5);
+	cout << (char)201;
+	for (int i = 11; i <= 201; ++i) cout << (char)205;
+	cout << (char)187;
+
+	for (int i = 6; i <= 43; ++i)
+	{
+		gotoXY(10, i);
+		cout << (char)186;
+		gotoXY(202, i);
+		cout << (char)186;
+	}
+
+	gotoXY(10, 44);
+	cout << (char)200;
+	for (int i = 11; i <= 201; ++i) cout << (char)205;
+	cout << (char)188;
+}
+
+void Screen::drawCrossyRoad(int x, int y)
+{
+	using yaosu::color;
+	using yaosu::gotoXY;
+	using std::cout;
+
+	color(y);
+
+	Sleep(x);
+	gotoXY(49, 10); cout << " ------    -----       -----     ------   ------   \\     /          -----       -----          /\\         -----\\"; Sleep(x);
+	gotoXY(49, 11); cout << "|         |     |     |     |   |        |          \\   /          |     |     |     |        /  \\        |     \\"; Sleep(x);
+	gotoXY(49, 12); cout << "|         |     |     |     |   |        |           \\ /           |     |     |     |       /    \\       |      \\"; Sleep(x);
+	gotoXY(49, 13); cout << "|         |-----      |     |    -----    -----       |            |-----      |     |      /------\\      |      |"; Sleep(x);
+	gotoXY(49, 14); cout << "|         |     \\     |     |         |        |      |            |     \\     |     |     /        \\     |      /"; Sleep(x);
+	gotoXY(49, 15); cout << "|         |      \\    |     |         |        |      |            |      \\    |     |    /          \\    |     /"; Sleep(x);
+	gotoXY(49, 16); cout << " ------   |       \\    -----    ------   ------       |            |       \\    -----    /            \\   -----/"; Sleep(x);
 }
