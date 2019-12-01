@@ -20,6 +20,24 @@ void Game::run()
 	yaosu::playThemeSong();
 	sc.splashScreen();
 	int action = sc.menuScreen();
+	while (1)
+	{
+		switch (action)
+		{
+		case 0:
+			play();
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			return;
+		default:
+			break;
+		}
+		action = sc.menuScreen();
+	}
 }
 
 void Game::load()

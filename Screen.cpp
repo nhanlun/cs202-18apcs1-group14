@@ -54,7 +54,7 @@ void Screen::splashScreen()
 	gotoXY(155, 25); cout << "   |_|-|_|.__>";
 	Sleep(x);
 
-	x = 100;
+	x = 80;
 	for (int i = 0; i < 6; ++i)
 	{
 		Sleep(x);
@@ -64,14 +64,13 @@ void Screen::splashScreen()
 			drawCrossyRoad(x, 15);
 	}
 
-	gotoXY(93, 32); //cout << "Press any key to continue";
+	gotoXY(93, 32); 
 	system("pause");
-
-	//char tmp = _getch();
 }
 
 int Screen::menuScreen()
 {
+	system("cls");
 	using yaosu::color;
 	using yaosu::gotoXY;
 	using std::cout;
@@ -162,6 +161,7 @@ int Screen::getLeftBorder() const
 
 void Screen::displayMap() const
 {
+	system("cls");
 	yaosu::color(15);
 	char pavement = 177;
 	int row = 4;
