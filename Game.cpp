@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game():levels(10),currentLevel(0),gameState(State::RUN)
+Game::Game():levels(10),currentLevel(0),gameState(State::RUN),playerColor(Color::DEFAULT)
 {
 	//Random the level
 	for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
@@ -30,6 +30,7 @@ void Game::run()
 		case 1:
 			break;
 		case 2:
+			settings();
 			break;
 		case 3:
 			return;
@@ -86,5 +87,26 @@ void Game::play()
 		}
 
 		++currentLevel;
+	}
+}
+
+void Game::settings()
+{
+	int action = sc.settingsMenu();
+	while (1)
+	{
+		switch (action)
+		{
+		case 0:
+			//turn off music
+			break;
+		case 1:
+			//change color
+			break;
+		case 2:
+			return;
+		default:;
+		}
+		action = sc.settingsMenu();
 	}
 }

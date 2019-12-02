@@ -17,11 +17,14 @@ public:
 	void save();
 	void play();
 
+	void settings();
+
 private:
 	Screen sc;
 
 	std::vector<Level*> levels;
 	int currentLevel;
+	Color playerColor;
 	State gameState;
 };
 

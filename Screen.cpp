@@ -111,10 +111,66 @@ int Screen::menuScreen()
 			switch (cmd)
 			{
 			case 'w':
-				moveCursor(-1, cur);
+				moveCursor(-1, cur, 4);
 				break;
 			case 's':
-				moveCursor(1, cur);
+				moveCursor(1, cur, 4);
+				break;
+			case ' ':
+				return option[cur - 24];
+			default:
+				break;
+			}
+		}
+	}
+}
+
+int Screen::settingsMenu()
+{
+	system("cls");
+	using yaosu::color;
+	using yaosu::gotoXY;
+	using std::cout;
+
+	drawBorder();
+	drawCrossyRoad(0, 10);
+
+	color(11);
+	gotoXY(41, 22); cout << "    ______        ";
+	gotoXY(41, 23); cout << " __/   |##\\___    ";
+	gotoXY(41, 24); cout << "[/ _ \\====/ _ \\]";
+	gotoXY(41, 25); cout << " \\___/    \\___/ ";
+
+	color(11);
+	gotoXY(155, 22); cout << " __           ";
+	gotoXY(155, 23); cout << "(_^\\-^^^-.    ";
+	gotoXY(155, 24); cout << "  \\       \\__ ";
+	gotoXY(155, 25); cout << "   |_|-|_|.__>";
+
+	gotoXY(97, 24); cout << "                    ";
+	gotoXY(97, 25); cout << "                    ";
+	gotoXY(97, 26); cout << "                    ";
+	gotoXY(97, 27); cout << "                    ";
+
+	gotoXY(102, 24); cout << "Music On/Off";
+	gotoXY(102, 25); cout << "Player Color";
+	gotoXY(102, 26); cout << "Back";
+
+	displayCursor();
+	int cur = 24;
+	int option[] = { 0, 1, 2 };
+	while (1)
+	{
+		if (_kbhit())
+		{
+			char cmd = _getch();
+			switch (cmd)
+			{
+			case 'w':
+				moveCursor(-1, cur, 3);
+				break;
+			case 's':
+				moveCursor(1, cur, 3);
 				break;
 			case ' ':
 				return option[cur - 24];
@@ -245,12 +301,12 @@ void Screen::displayCursor()
 	yaosu::gotoXY(98, 24); std::cout << '>';
 }
 
-void Screen::moveCursor(int x, int& cur)
+void Screen::moveCursor(int x, int& cur, int numOptions)
 {
 	using yaosu::gotoXY;
 	using std::cout;
 	int tmp = cur + x;
-	if (tmp >= 24 && tmp <= 27)
+	if (tmp >= 24 && tmp < 24 + numOptions)
 	{
 		gotoXY(98, cur);
 		cout << ' ';
