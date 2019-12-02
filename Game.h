@@ -9,15 +9,17 @@
 class Game
 {
 public:
-	Game();
+	Game() = default;
 	~Game();
 
 	void run();
+
+private:
+	void initGame();
 	void load();
 	void save();
 	void play();
 
-private:
 	Screen sc;
 
 	std::vector<Level*> levels;

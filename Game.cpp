@@ -1,14 +1,5 @@
 #include "Game.h"
 
-Game::Game():levels(10),currentLevel(0),gameState(State::RUN)
-{
-	//Random the level
-	for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
-	{
-		levels[noLevel - 1] = new Level(noLevel, sc, gameState);
-	}
-}
-
 Game::~Game()
 {
 	for (auto& i : levels)
@@ -37,6 +28,20 @@ void Game::run()
 			break;
 		}
 		action = sc.menuScreen();
+	}
+}
+
+void Game::initGame()
+{
+	currentLevel = 0;
+	gameState = State::RUN;
+	for (auto& i : levels) delete i;
+	levels.clear();
+
+	levels.resize(10, nullptr);
+	for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
+	{
+		levels[noLevel - 1] = new Level(noLevel, sc, gameState);
 	}
 }
 
@@ -73,7 +78,9 @@ void Game::save()
 
 void Game::play()
 {
+	system("cls");
 	sc.runScreen();
+	initGame();
 	while (currentLevel < (int)levels.size())
 	{
 		sc.levelDisplay(currentLevel);
