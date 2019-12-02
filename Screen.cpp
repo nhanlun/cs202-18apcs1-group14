@@ -70,115 +70,58 @@ void Screen::splashScreen()
 
 int Screen::menuScreen()
 {
-	system("cls");
 	using yaosu::color;
 	using yaosu::gotoXY;
 	using std::cout;
 
-	drawBorder();
-	drawCrossyRoad(0, 10);
-
-	color(11);
-	gotoXY(41, 22); cout << "    ______        ";
-	gotoXY(41, 23); cout << " __/   |##\\___    ";
-	gotoXY(41, 24); cout << "[/ _ \\====/ _ \\]";
-	gotoXY(41, 25); cout << " \\___/    \\___/ ";
-
-	color(11);
-	gotoXY(155, 22); cout << " __           ";
-	gotoXY(155, 23); cout << "(_^\\-^^^-.    ";
-	gotoXY(155, 24); cout << "  \\       \\__ ";
-	gotoXY(155, 25); cout << "   |_|-|_|.__>";
-
-	gotoXY(97, 24); cout << "                    "; 
-	gotoXY(97, 25); cout << "                    ";
-	gotoXY(97, 26); cout << "                    "; 
-	gotoXY(97, 27); cout << "                    "; 
-
+	eraseCenter();
+	color(int(Color::CYAN));
 	gotoXY(102, 24); cout << "New game";
 	gotoXY(102, 25); cout << "Load game";
 	gotoXY(102, 26); cout << "Settings";
 	gotoXY(102, 27); cout << "Exit";
 
-	displayCursor();
-	int cur = 24;
 	int option[] = { 0, 1, 2, 3 };
-	while (1)
-	{
-		if (_kbhit())
-		{
-			char cmd = _getch();
-			switch (cmd)
-			{
-			case 'w':
-				moveCursor(-1, cur, 4);
-				break;
-			case 's':
-				moveCursor(1, cur, 4);
-				break;
-			case ' ':
-				return option[cur - 24];
-			default:
-				break;
-			}
-		}
-	}
+	return menuSelect(option, 4);
 }
 
 int Screen::settingsMenu()
 {
-	system("cls");
 	using yaosu::color;
 	using yaosu::gotoXY;
 	using std::cout;
 
-	drawBorder();
-	drawCrossyRoad(0, 10);
-
-	color(11);
-	gotoXY(41, 22); cout << "    ______        ";
-	gotoXY(41, 23); cout << " __/   |##\\___    ";
-	gotoXY(41, 24); cout << "[/ _ \\====/ _ \\]";
-	gotoXY(41, 25); cout << " \\___/    \\___/ ";
-
-	color(11);
-	gotoXY(155, 22); cout << " __           ";
-	gotoXY(155, 23); cout << "(_^\\-^^^-.    ";
-	gotoXY(155, 24); cout << "  \\       \\__ ";
-	gotoXY(155, 25); cout << "   |_|-|_|.__>";
-
-	gotoXY(97, 24); cout << "                    ";
-	gotoXY(97, 25); cout << "                    ";
-	gotoXY(97, 26); cout << "                    ";
-	gotoXY(97, 27); cout << "                    ";
-
+	eraseCenter();
+	color(int(Color::CYAN));
 	gotoXY(102, 24); cout << "Music On/Off";
 	gotoXY(102, 25); cout << "Player Color";
 	gotoXY(102, 26); cout << "Back";
 
-	displayCursor();
-	int cur = 24;
 	int option[] = { 0, 1, 2 };
-	while (1)
-	{
-		if (_kbhit())
-		{
-			char cmd = _getch();
-			switch (cmd)
-			{
-			case 'w':
-				moveCursor(-1, cur, 3);
-				break;
-			case 's':
-				moveCursor(1, cur, 3);
-				break;
-			case ' ':
-				return option[cur - 24];
-			default:
-				break;
-			}
-		}
-	}
+	return menuSelect(option, 3);
+}
+
+int Screen::colorMenu()
+{
+	using yaosu::color;
+	using yaosu::gotoXY;
+	using std::cout;
+
+	eraseCenter();
+	color(int(Color::CYAN));
+	gotoXY(102, 24); color(int(Color::DEFAULT)); cout << char(254) << char(254);
+	gotoXY(102, 25); color(int(Color::GREY)); cout << char(254) << char(254);
+	gotoXY(102, 26); color(int(Color::BLUE)); cout << char(254) << char(254);
+	gotoXY(102, 27); color(int(Color::GREEN)); cout << char(254) << char(254);
+	gotoXY(102, 28); color(int(Color::CYAN)); cout << char(254) << char(254);
+	gotoXY(102, 29); color(int(Color::RED)); cout << char(254) << char(254);
+	gotoXY(102, 30); color(int(Color::PINK)); cout << char(254) << char(254);
+	gotoXY(102, 31); color(int(Color::YELLOW)); cout << char(254) << char(254);
+	gotoXY(102, 32); color(int(Color::WHITE)); cout << char(254) << char(254);
+	gotoXY(102, 33); color(int(Color::DEFAULT)); cout << "Back";
+
+	int option[] = { 7, 8, 9, 10, 11, 12, 13, 14, 15, -1 };
+	return menuSelect(option, 10);
 }
 
 void Screen::levelDisplay(int noLevel)
@@ -217,7 +160,7 @@ int Screen::getLeftBorder() const
 
 void Screen::displayMap() const
 {
-	system("cls");
+	//system("cls");
 	yaosu::color(15);
 	char pavement = 177;
 	int row = 4;
@@ -293,6 +236,43 @@ void Screen::eraseRightPanel() const
 	{
 		yaosu::gotoXY(rightBorder + 1, row);
 		std::cout << blankLine;
+	}
+}
+
+void Screen::eraseCenter() const 
+{
+	for (int col = 70; col <= 140; ++col)
+		for (int row = 20; row <= 40; ++row) 
+		{
+			yaosu::gotoXY(col, row);
+			std::cout << " ";
+		}
+}
+
+int Screen::menuSelect(int option[], int numOptions) 
+{
+	displayCursor();
+	int cur = 24;
+
+	while (1)
+	{
+		if (_kbhit())
+		{
+			char cmd = _getch();
+			switch (cmd)
+			{
+			case 'w':
+				moveCursor(-1, cur, 10);
+				break;
+			case 's':
+				moveCursor(1, cur, 10);
+				break;
+			case ' ':
+				return option[cur - 24];
+			default:
+				break;
+			}
+		}
 	}
 }
 

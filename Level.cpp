@@ -1,8 +1,8 @@
 #include "Level.h"
 
-Level::Level(int noLevel, Screen& _sc, State& state) : lanes(2 * noLevel), gameState(state)
+Level::Level(int noLevel, Screen& _sc, State& state, Color playerColor) : lanes(2 * noLevel), gameState(state)
 {
-	player = new Player(15, 41);
+	player = new Player(15, 41, playerColor);
 
 	for (unsigned index = 0; index < lanes.size(); ++index)
 	{

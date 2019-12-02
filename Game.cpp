@@ -1,12 +1,8 @@
 #include "Game.h"
 
-Game::Game():levels(10),currentLevel(0),gameState(State::RUN),playerColor(Color::DEFAULT)
+Game::Game()
 {
-	//Random the level
-	for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
-	{
-		levels[noLevel - 1] = new Level(noLevel, sc, gameState);
-	}
+	playerColor = Color::DEFAULT;
 }
 
 Game::~Game()
@@ -38,6 +34,20 @@ void Game::run()
 			break;
 		}
 		action = sc.menuScreen();
+	}
+}
+
+void Game::initGame()
+{
+	currentLevel = 0;
+	gameState = State::RUN;
+	for (auto& i : levels) delete i;
+	levels.clear();
+
+	levels.resize(10, nullptr);
+	for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
+	{
+		levels[noLevel - 1] = new Level(noLevel, sc, gameState, playerColor);
 	}
 }
 
@@ -74,7 +84,9 @@ void Game::save()
 
 void Game::play()
 {
+	system("cls");
 	sc.runScreen();
+	initGame();
 	while (currentLevel < (int)levels.size())
 	{
 		sc.levelDisplay(currentLevel);
@@ -101,7 +113,7 @@ void Game::settings()
 			//turn off music
 			break;
 		case 1:
-			//change color
+			changeColor();
 			break;
 		case 2:
 			return;
@@ -109,4 +121,10 @@ void Game::settings()
 		}
 		action = sc.settingsMenu();
 	}
+}
+
+void Game::changeColor()
+{
+	int action = sc.colorMenu();
+	if (action != -1) playerColor = Color(action);
 }

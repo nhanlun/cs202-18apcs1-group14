@@ -2,8 +2,6 @@
 
 Obstacle::Obstacle(int w, int h) : x(0), y(0), width(w), height(h) {}
 
-Obstacle::~Obstacle() {}
-
 void Obstacle::move(Direction dir, const Screen& sc, Color color)
 {
 	hide(dir, sc);

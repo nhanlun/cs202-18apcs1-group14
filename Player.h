@@ -11,7 +11,7 @@ class Player
 {
 public:
 	Player();
-	Player(int _x, int _y);
+	Player(int _x, int _y, Color _color);
 
 	void move(Direction dir, const Screen& sc);
 	void display();
@@ -30,6 +30,7 @@ private:
 
 	int x, y; //center of 3x3
 	bool alive;
+	Color color;
 };
 
 #endif

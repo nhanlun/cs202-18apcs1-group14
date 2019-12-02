@@ -13,13 +13,15 @@ public:
 	~Game();
 
 	void run();
+
+private:
+	void initGame();
 	void load();
 	void save();
 	void play();
-
 	void settings();
+	void changeColor();
 
-private:
 	Screen sc;
 
 	std::vector<Level*> levels;

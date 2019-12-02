@@ -2,18 +2,20 @@
 #include <iostream>
 #include <conio.h>
 
-Player::Player() : x(1), y(1), alive(true) {}
+Player::Player() : x(1), y(1), alive(true), color(Color::DEFAULT) {}
 
-Player::Player(int _x, int _y) : x(_x), y(_y), alive(true) {}
+Player::Player(int _x, int _y, Color _color) : x(_x), y(_y), alive(true), color(_color) {}
 
 void Player::display()
 {
+	yaosu::color(int(color));
 	yaosu::gotoXY(x - 1, y - 1);
 	std::cout << " O ";
 	yaosu::gotoXY(x - 1, y);
 	std::cout << '/' << char(219) << '\\';
 	yaosu::gotoXY(x - 1, y + 1);
 	std::cout << '/' << ' ' << '\\';
+	yaosu::color(int(Color::DEFAULT));
 }
 
 void Player::hide()

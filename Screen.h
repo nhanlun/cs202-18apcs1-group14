@@ -15,6 +15,7 @@ public:
 	void splashScreen();
 	int menuScreen(); // 0: new game, 1 : load game, 2 : settings, 3 : exit
 	int settingsMenu(); // 0: music on/off, 1: player color
+	int colorMenu();
 
 	void levelDisplay(int noLevel);
 	void runScreen() const;
@@ -28,9 +29,10 @@ public:
 
 	void eraseMap() const;
 	void eraseRightPanel() const;
+	void eraseCenter() const;
 
 private:
-
+	int menuSelect(int option[], int numOptions);
 	void displayCursor();
 	void moveCursor(int x, int& cur, int numOptions);
 
