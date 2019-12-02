@@ -13,8 +13,8 @@ Game::~Game()
 
 void Game::run()
 {
-	yaosu::playThemeSong();
-	sc.splashScreen();
+	//yaosu::playThemeSong();
+	//sc.splashScreen();
 	int action = sc.menuScreen();
 	while (1)
 	{
@@ -57,29 +57,32 @@ void Game::load()
 
 void Game::save()
 {
-	std::cout << "Which file do you want to save? \n";
-	int file; std::cin >> file;
+	int choice = sc.saveScreen();
+
 	std::ofstream fo;
 
-	switch (file)
+	switch (choice)
 	{
-	case 1:
+	case 0:
 		fo.open("game1.txt");
 		break;
-	case 2:
+	case 1:
 		fo.open("game2.txt");
 		break;
-	case 3:
+	case 2:
 		fo.open("game3.txt");
 		break;
+	case 3:
+		return;
 	default:
-		break;
+		return;
 	}
 	
 	fo << currentLevel << '\n';
 	for (auto& i : levels)
 		i->save(fo);
 	fo.close();
+	sc.saveSuccessfully();
 }
 
 void Game::play()

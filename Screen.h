@@ -20,7 +20,9 @@ public:
 	void levelDisplay(int noLevel);
 	void runScreen() const;
 	void pauseScreen() const;
-	
+	int saveScreen();
+	void saveSuccessfully();
+
 	Light* lightFactory(Direction dir, int row) const; //create traffic light base on lane row and direction
 
 	int getRightBorder() const;
@@ -32,9 +34,9 @@ public:
 	void eraseCenter() const;
 
 private:
-	int menuSelect(int option[], int numOptions);
-	void displayCursor();
-	void moveCursor(int x, int& cur, int numOptions);
+	int menuSelect(int option[], int numOptions,int col=98, int row=24);
+	void displayCursor(int col=98, int row=24);
+	void moveCursor(int x, int& cur, int numOptions,int col=98,int row=24);
 
 	void drawBorder();
 	void drawCrossyRoad(int x, int y); // draw the figure crossy road with sleep x, color y

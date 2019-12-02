@@ -147,6 +147,25 @@ void Screen::pauseScreen() const
 	yaosu::printCenter(rightBorder, width, "ESC: Back To Main Menu", 27);
 }
 
+int Screen::saveScreen()
+{
+	yaosu::printCenter(rightBorder, width, "Which file do you want to save? \n", 29);
+	yaosu::printCenter(rightBorder, width, "File 1", 31);
+	yaosu::printCenter(rightBorder, width, "File 2", 32);
+	yaosu::printCenter(rightBorder, width, "File 3", 33);
+	yaosu::printCenter(rightBorder, width, "Main menu", 34);
+	int option[] = {0, 1, 2, 3};
+	return menuSelect(option, 4, 160,31);
+}
+
+void Screen::saveSuccessfully()
+{
+	yaosu::gotoXY(102, 25);
+	yaosu::color(int(Color::CYAN));
+	std::cout << "SAVED!";
+	Sleep(500);
+}
+
 Light* Screen::lightFactory(Direction dir, int row) const
 {
 	if (dir == Direction::LEFT) return new Light(leftBorder, row - 1, false);
@@ -249,10 +268,10 @@ void Screen::eraseCenter() const
 		}
 }
 
-int Screen::menuSelect(int option[], int numOptions) 
+int Screen::menuSelect(int option[], int numOptions, int col,int row) 
 {
-	displayCursor();
-	int cur = 24;
+	displayCursor(col,row);
+	int cur = row;
 
 	while (1)
 	{
@@ -262,13 +281,13 @@ int Screen::menuSelect(int option[], int numOptions)
 			switch (cmd)
 			{
 			case 'w':
-				moveCursor(-1, cur, 10);
+				moveCursor(-1, cur, numOptions,col,row);
 				break;
 			case 's':
-				moveCursor(1, cur, 10);
+				moveCursor(1, cur, numOptions,col,row);
 				break;
 			case ' ':
-				return option[cur - 24];
+				return option[cur-row];
 			default:
 				break;
 			}
@@ -276,21 +295,21 @@ int Screen::menuSelect(int option[], int numOptions)
 	}
 }
 
-void Screen::displayCursor()
+void Screen::displayCursor(int col,int row)
 {
-	yaosu::gotoXY(98, 24); std::cout << '>';
+	yaosu::gotoXY(col, row); std::cout << '>';
 }
 
-void Screen::moveCursor(int x, int& cur, int numOptions)
+void Screen::moveCursor(int x, int& cur, int numOptions,int col,int row)
 {
 	using yaosu::gotoXY;
 	using std::cout;
 	int tmp = cur + x;
-	if (tmp >= 24 && tmp < 24 + numOptions)
+	if (tmp >= row && tmp < row + numOptions)
 	{
-		gotoXY(98, cur);
+		gotoXY(col, cur);
 		cout << ' ';
-		gotoXY(98, tmp);
+		gotoXY(col, tmp);
 		cout << '>';
 		cur = tmp;
 	}
