@@ -18,15 +18,15 @@ public:
 	bool isAlive();
 	bool isImpact(Obstacle* obstacle, Direction dir) const;
 
-	void play(const Screen& sc, std::mutex* ioMtx, State& state);
+	void play(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSlot);
 	void reset();
 
 private:
 	void hide();
 
 	void runMode(const Screen& sc, std::mutex* ioMtx, State& state);
-	void pauseMode(const Screen& sc, std::mutex* ioMtx, State& state);
-	void saveMode(const Screen& sc, std::mutex* ioMtx, State& state);
+	void pauseMode(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSlot);
+	void saveMode(const Screen& sc, std::mutex* ioMtx, int& saveSlot);
 
 	int x, y; //center of 3x3
 	bool alive;

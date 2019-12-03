@@ -55,13 +55,11 @@ void Game::load()
 {
 }
 
-void Game::save()
+void Game::save(int saveSlot)
 {
-	int choice = sc.saveScreen();
-
 	std::ofstream fo;
 
-	switch (choice)
+	switch (saveSlot)
 	{
 	case 0:
 		fo.open("game1.txt");
@@ -74,8 +72,7 @@ void Game::save()
 		break;
 	case 3:
 		return;
-	default:
-		return;
+	default:;
 	}
 	
 	fo << currentLevel << '\n';
@@ -93,11 +90,12 @@ void Game::play()
 	while (currentLevel < (int)levels.size())
 	{
 		sc.levelDisplay(currentLevel);
-		levels[currentLevel]->run(sc);
+		int saveSlot = 0;
+		levels[currentLevel]->run(sc, saveSlot);
 
 		if (gameState != State::WIN)
 		{
-			if (gameState == State::SAVE) save();
+			if (gameState == State::SAVE) save(saveSlot);
 			break;
 		}
 

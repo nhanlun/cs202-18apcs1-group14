@@ -17,7 +17,7 @@ public:
 private:
 	void initGame();
 	void load();
-	void save();
+	void save(int saveSlot);
 	void play();
 	void settings();
 	void changeColor();

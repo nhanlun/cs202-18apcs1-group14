@@ -31,7 +31,7 @@ Level::~Level()
 	delete player;
 }
 
-void Level::run(const Screen& sc)
+void Level::run(const Screen& sc, int& saveSlot)
 {
 	unsigned noLane = 1;
 
@@ -42,7 +42,7 @@ void Level::run(const Screen& sc)
 		resetPlayer();
 
 		std::vector<std::thread*> vThread;
-		addThreadPlayer(vThread, sc);
+		addThreadPlayer(vThread, sc, saveSlot);
 		addThreadLanes(vThread, sc, noLane);
 		runThreads(vThread);
 
@@ -63,10 +63,10 @@ void Level::resetPlayer()
 	player->display();
 }
 
-void Level::addThreadPlayer(std::vector<std::thread*>& vThread, const Screen& sc)
+void Level::addThreadPlayer(std::vector<std::thread*>& vThread, const Screen& sc, int& saveSlot)
 {
 	vThread.push_back(new std::thread(&Player::play, player, std::ref(sc),
-		&ioMtx, std::ref(gameState)));
+		&ioMtx, std::ref(gameState), std::ref(saveSlot)));
 }
 
 void Level::addThreadLanes(std::vector<std::thread*>& vThread, const Screen& sc, 

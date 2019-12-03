@@ -14,12 +14,12 @@ public:
 	Level(int noLevel, Screen& sc, State& state, Color playerColor);
 	~Level();
 
-	void run(const Screen& sc);
+	void run(const Screen& sc, int& saveSlot);
 	void save(std::ofstream& fo);
 
 private:
 	void resetPlayer();
-	void addThreadPlayer(std::vector<std::thread*>& vThread, const Screen& sc);
+	void addThreadPlayer(std::vector<std::thread*>& vThread, const Screen& sc, int& saveSlot);
 	void addThreadLanes(std::vector<std::thread*>& vThread, const Screen& sc, 
 		unsigned& noLane);
 	void runThreads(std::vector<std::thread*>& vThread);

@@ -62,12 +62,12 @@ bool Player::isImpact(Obstacle* obstacle, Direction dir) const
 	return obstacle->isImpact(x, y, dir);
 }
 
-void Player::play(const Screen& sc, std::mutex* ioMtx, State& state)
+void Player::play(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSlot)
 {
 	while (state == State::RUN || state == State::PAUSE)
 	{
 		if (state == State::RUN) runMode(sc, ioMtx, state);
-		else pauseMode(sc, ioMtx, state);
+		else pauseMode(sc, ioMtx, state, saveSlot);
 		Sleep(80);
 	}
 }
@@ -103,7 +103,7 @@ void Player::runMode(const Screen& sc, std::mutex* ioMtx, State& state)
 	}
 }
 
-void Player::pauseMode(const Screen& sc, std::mutex* ioMtx, State& state)
+void Player::pauseMode(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSlot)
 {
 	if (_kbhit())
 	{
@@ -112,8 +112,9 @@ void Player::pauseMode(const Screen& sc, std::mutex* ioMtx, State& state)
 		switch (cmd)
 		{
 		case 'S':
-			saveMode(sc, ioMtx, state);
-			state = State::SAVE;
+			saveMode(sc, ioMtx, saveSlot);
+			if (saveSlot) state = State::SAVE;
+			else sc.eraseRightPanel(29, 34);
 			break;
 		case 'R':
 			sc.runScreen();
@@ -128,9 +129,10 @@ void Player::pauseMode(const Screen& sc, std::mutex* ioMtx, State& state)
 	}
 }
 
-void Player::saveMode(const Screen& sc, std::mutex* ioMtx, State& state)
+void Player::saveMode(const Screen& sc, std::mutex* ioMtx, int& saveSlot)
 {
-	// get input here
+	int action = sc.saveScreen();
+	if (action != 3) saveSlot = action;
 }
 
 void Player::reset()

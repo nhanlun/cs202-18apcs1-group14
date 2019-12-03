@@ -147,19 +147,20 @@ void Screen::pauseScreen() const
 	yaosu::printCenter(rightBorder, width, "ESC: Back To Main Menu", 27);
 }
 
-int Screen::saveScreen()
+int Screen::saveScreen() const
 {
 	yaosu::printCenter(rightBorder, width, "Which file do you want to save? \n", 29);
 	yaosu::printCenter(rightBorder, width, "File 1", 31);
 	yaosu::printCenter(rightBorder, width, "File 2", 32);
 	yaosu::printCenter(rightBorder, width, "File 3", 33);
-	yaosu::printCenter(rightBorder, width, "Main menu", 34);
+	yaosu::printCenter(rightBorder, width, "Back", 34);
 	int option[] = {0, 1, 2, 3};
 	return menuSelect(option, 4, 160,31);
 }
 
 void Screen::saveSuccessfully()
 {
+	system("cls");
 	yaosu::gotoXY(102, 25);
 	yaosu::color(int(Color::CYAN));
 	std::cout << "SAVED!";
@@ -248,10 +249,10 @@ void Screen::eraseMap() const
 	}
 }
 
-void Screen::eraseRightPanel() const
+void Screen::eraseRightPanel(int r1, int r2) const
 {
 	std::string blankLine(width - rightBorder - 1, ' ');
-	for (int row = 0; row < height; ++row)
+	for (int row = r1; row <= r2; ++row)
 	{
 		yaosu::gotoXY(rightBorder + 1, row);
 		std::cout << blankLine;
@@ -268,7 +269,7 @@ void Screen::eraseCenter() const
 		}
 }
 
-int Screen::menuSelect(int option[], int numOptions, int col,int row) 
+int Screen::menuSelect(int option[], int numOptions, int col,int row) const
 {
 	displayCursor(col,row);
 	int cur = row;
@@ -295,12 +296,12 @@ int Screen::menuSelect(int option[], int numOptions, int col,int row)
 	}
 }
 
-void Screen::displayCursor(int col,int row)
+void Screen::displayCursor(int col,int row) const
 {
 	yaosu::gotoXY(col, row); std::cout << '>';
 }
 
-void Screen::moveCursor(int x, int& cur, int numOptions,int col,int row)
+void Screen::moveCursor(int x, int& cur, int numOptions,int col,int row) const
 {
 	using yaosu::gotoXY;
 	using std::cout;
