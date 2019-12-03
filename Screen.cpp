@@ -74,7 +74,7 @@ int Screen::menuScreen()
 	using yaosu::gotoXY;
 	using std::cout;
 
-	eraseCenter();
+	system("cls");
 	color(int(Color::CYAN));
 	gotoXY(102, 24); cout << "New game";
 	gotoXY(102, 25); cout << "Load game";

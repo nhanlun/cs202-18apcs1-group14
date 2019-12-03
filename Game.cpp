@@ -96,7 +96,7 @@ void Game::play()
 	while (currentLevel < (int)levels.size())
 	{
 		sc.levelDisplay(currentLevel);
-		int saveSlot = 0;
+		int saveSlot = -1;
 		levels[currentLevel]->run(sc, saveSlot);
 
 		if (gameState != State::WIN)
@@ -178,4 +178,5 @@ bool Game::saveSettingFile()
 		return false;
 	fo << sound<<'\n';
 	fo << (int)playerColor << '\n';
+	return true;
 }

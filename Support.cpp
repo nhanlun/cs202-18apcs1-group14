@@ -93,7 +93,7 @@ namespace yaosu
 
 	void playThemeSong()
 	{
-		PlaySound(TEXT("cs202-18apcs1-group14/Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);
+		PlaySound(TEXT("Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);
 	}
 
 	void stopThemeSong()

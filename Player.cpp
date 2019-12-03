@@ -113,7 +113,7 @@ void Player::pauseMode(const Screen& sc, std::mutex* ioMtx, State& state, int& s
 		{
 		case 'S':
 			saveMode(sc, ioMtx, saveSlot);
-			if (saveSlot) state = State::SAVE;
+			if (saveSlot != -1) state = State::SAVE;
 			else sc.eraseRightPanel(29, 34);
 			break;
 		case 'R':
