@@ -32,6 +32,7 @@ namespace yaosu
 	void setWindow();
 	void printCenter(int left, int right, std::string content, int row, Color c = Color::DEFAULT);
 	void playThemeSong();
+	void stopThemeSong();
 	std::string getStringOf(Type t);// for debug purpose
 	//void ambulance();
 }

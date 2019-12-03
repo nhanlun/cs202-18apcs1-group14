@@ -21,11 +21,15 @@ private:
 	void play();
 	void settings();
 	void changeColor();
+	bool createSettingFile();
+	bool loadSettingFile();
+	bool saveSettingFile();
 
 	Screen sc;
 
 	std::vector<Level*> levels;
 	int currentLevel;
+	bool sound; // if sound is true: music is on
 	Color playerColor;
 	State gameState;
 };

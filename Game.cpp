@@ -2,18 +2,24 @@
 
 Game::Game()
 {
-	playerColor = Color::DEFAULT;
+	if (!loadSettingFile())
+	{
+		createSettingFile();
+		loadSettingFile();
+	}
+	if (sound)
+		yaosu::playThemeSong();
 }
 
 Game::~Game()
 {
+	saveSettingFile();
 	for (auto& i : levels)
 		delete i;
 }
 
 void Game::run()
 {
-	//yaosu::playThemeSong();
 	//sc.splashScreen();
 	int action = sc.menuScreen();
 	while (1)
@@ -111,7 +117,16 @@ void Game::settings()
 		switch (action)
 		{
 		case 0:
-			//turn off music
+			if (sound)
+			{
+				sound = false;
+				yaosu::stopThemeSong();
+			}
+			else
+			{
+				sound = true;
+				yaosu::playThemeSong();
+			}
 			break;
 		case 1:
 			changeColor();
@@ -128,4 +143,39 @@ void Game::changeColor()
 {
 	int action = sc.colorMenu();
 	if (action != -1) playerColor = Color(action);
+}
+
+bool Game::createSettingFile()
+{
+	std::ofstream fo;
+	fo.open("Setting.cfg");
+	if (!fo.is_open())
+		return false;
+	fo << 1 << '\n';
+	fo << (int)Color::DEFAULT << '\n';
+	fo.close();
+	return true;
+}
+
+bool Game::loadSettingFile()
+{
+	std::ifstream fin;
+	fin.open("Setting.cfg");
+	if (!fin.is_open())
+		return false;
+	fin >> sound;
+	int color; 
+	fin >> color;
+	playerColor = Color(color);
+	return true;
+}
+
+bool Game::saveSettingFile()
+{
+	std::ofstream fo;
+	fo.open("Setting.cfg");
+	if (!fo.is_open())
+		return false;
+	fo << sound<<'\n';
+	fo << (int)playerColor << '\n';
 }

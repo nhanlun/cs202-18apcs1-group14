@@ -93,7 +93,12 @@ namespace yaosu
 
 	void playThemeSong()
 	{
-		PlaySound(TEXT("Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);
+		PlaySound(TEXT("cs202-18apcs1-group14/Sound/Sunny Day Whistler.wav"), NULL, SND_LOOP | SND_ASYNC);
+	}
+
+	void stopThemeSong()
+	{
+		PlaySound(NULL, NULL, SND_LOOP | SND_ASYNC);
 	}
 
 	std::string getStringOf(Type t)
