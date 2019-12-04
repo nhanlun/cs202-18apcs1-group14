@@ -53,7 +53,7 @@ void Game::initGame()
 	levels.resize(10, nullptr);
 	for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
 	{
-		levels[noLevel - 1] = new Level(noLevel, sc, gameState, playerColor);
+		levels[noLevel - 1] = new Level(noLevel, sc, gameState, playerColor, difficulty);
 	}
 }
 
@@ -93,7 +93,7 @@ void Game::play()
 	system("cls");
 	sc.runScreen();
 	initGame();
-	while (currentLevel < (int)levels.size())
+	while (true)
 	{
 		sc.levelDisplay(currentLevel);
 		int saveSlot = -1;
@@ -104,8 +104,10 @@ void Game::play()
 			if (gameState == State::SAVE) save(saveSlot);
 			break;
 		}
-
+		
+		sc.notiLevelUp();
 		++currentLevel;
+		if (currentLevel == int(levels.size())) currentLevel = 0;
 	}
 }
 
@@ -132,6 +134,9 @@ void Game::settings()
 			changeColor();
 			break;
 		case 2:
+			changeDifficulty();
+			break;
+		case 3:
 			return;
 		default:;
 		}
@@ -145,14 +150,37 @@ void Game::changeColor()
 	if (action != -1) playerColor = Color(action);
 }
 
+void Game::changeDifficulty()
+{
+	int action = sc.difficultyMenu();
+	switch (action) 
+	{
+	case 0:
+		difficulty = Difficulty::EASY;
+		break;
+	case 1:
+		difficulty = Difficulty::MEDIUM;
+		break;
+	case 2:
+		difficulty = Difficulty::HARD;
+		break;
+	case 3:
+		return;
+	default:;
+	}
+}
+
 bool Game::createSettingFile()
 {
 	std::ofstream fo;
 	fo.open("Setting.cfg");
+
 	if (!fo.is_open())
 		return false;
+
 	fo << 1 << '\n';
 	fo << (int)Color::DEFAULT << '\n';
+	fo << (int)Difficulty::MEDIUM << '\n';
 	fo.close();
 	return true;
 }
@@ -161,12 +189,20 @@ bool Game::loadSettingFile()
 {
 	std::ifstream fin;
 	fin.open("Setting.cfg");
+
 	if (!fin.is_open())
 		return false;
+
 	fin >> sound;
+
 	int color; 
 	fin >> color;
 	playerColor = Color(color);
+
+	int diff;
+	fin >> diff;
+	difficulty = Difficulty(diff);
+	fin.close();
 	return true;
 }
 
@@ -174,9 +210,13 @@ bool Game::saveSettingFile()
 {
 	std::ofstream fo;
 	fo.open("Setting.cfg");
+
 	if (!fo.is_open())
 		return false;
+
 	fo << sound<<'\n';
 	fo << (int)playerColor << '\n';
+	fo << (int)difficulty << '\n';
+	fo.close();
 	return true;
 }

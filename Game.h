@@ -21,6 +21,7 @@ private:
 	void play();
 	void settings();
 	void changeColor();
+	void changeDifficulty();
 	bool createSettingFile();
 	bool loadSettingFile();
 	bool saveSettingFile();
@@ -30,6 +31,7 @@ private:
 	std::vector<Level*> levels;
 	int currentLevel;
 	bool sound; // if sound is true: music is on
+	Difficulty difficulty;
 	Color playerColor;
 	State gameState;
 };

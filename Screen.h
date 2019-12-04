@@ -16,6 +16,7 @@ public:
 	int menuScreen(); // 0: new game, 1 : load game, 2 : settings, 3 : exit
 	int settingsMenu(); // 0: music on/off, 1: player color
 	int colorMenu();
+	int difficultyMenu();
 
 	void levelDisplay(int noLevel);
 	void runScreen() const;
@@ -32,6 +33,8 @@ public:
 	void eraseMap() const;
 	void eraseRightPanel(int r1, int r2) const; //erase from row 1 to row 2 in right panel
 	void eraseCenter() const;
+
+	void notiLevelUp() const;
 
 private:
 	int menuSelect(int option[], int numOptions,int col=98, int row=24) const;

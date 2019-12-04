@@ -21,6 +21,10 @@ enum class State
 {
 	RUN, STOP, PAUSE, WIN, LOSE, SAVE
 };
+enum class Difficulty 
+{
+	HARD = 30, MEDIUM = 35, EASY = 45
+};
 
 namespace yaosu
 {

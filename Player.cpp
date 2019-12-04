@@ -68,7 +68,7 @@ void Player::play(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSl
 	{
 		if (state == State::RUN) runMode(sc, ioMtx, state);
 		else pauseMode(sc, ioMtx, state, saveSlot);
-		Sleep(80);
+		Sleep(100);
 	}
 }
 

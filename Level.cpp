@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(int noLevel, Screen& _sc, State& state, Color playerColor) : lanes(2 * noLevel), gameState(state)
+Level::Level(int noLevel, Screen& _sc, State& state, Color playerColor, Difficulty diff) : lanes(2 * noLevel), gameState(state)
 {
 	player = new Player(15, 41, playerColor);
 
@@ -17,8 +17,8 @@ Level::Level(int noLevel, Screen& _sc, State& state, Color playerColor) : lanes(
 		else
 			speed = Speed(rand() % 4 + 1);
 
-		int spawnTime = 35;
-		if (type == Type::BIRD) spawnTime = 20;
+		int spawnTime = int(diff);
+		if (type == Type::BIRD) spawnTime -= 15;
 		spawnTime *= int(speed);
 
 		lanes[index] = new Lane(_sc, dir, type, row, clr, spawnTime, speed);

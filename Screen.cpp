@@ -95,10 +95,11 @@ int Screen::settingsMenu()
 	color(int(Color::CYAN));
 	gotoXY(102, 24); cout << "Music On/Off";
 	gotoXY(102, 25); cout << "Player Color";
-	gotoXY(102, 26); cout << "Back";
+	gotoXY(102, 26); cout << "Difficulty";
+	gotoXY(102, 27); cout << "Back";
 
-	int option[] = { 0, 1, 2 };
-	return menuSelect(option, 3);
+	int option[] = { 0, 1, 2, 3 };
+	return menuSelect(option, 4);
 }
 
 int Screen::colorMenu()
@@ -122,6 +123,23 @@ int Screen::colorMenu()
 
 	int option[] = { 7, 8, 9, 10, 11, 12, 13, 14, 15, -1 };
 	return menuSelect(option, 10);
+}
+
+int Screen::difficultyMenu()
+{
+	using yaosu::color;
+	using yaosu::gotoXY;
+	using std::cout;
+
+	eraseCenter();
+	color(int(Color::CYAN));
+	gotoXY(102, 24); cout << "Easy";
+	gotoXY(102, 25); cout << "Medium";
+	gotoXY(102, 26); cout << "Hard";
+	gotoXY(102, 27); cout << "Back";
+
+	int option[] = { 0,1,2,3 };
+	return menuSelect(option, 4);
 }
 
 void Screen::levelDisplay(int noLevel)
@@ -358,4 +376,17 @@ void Screen::drawCrossyRoad(int x, int y)
 	gotoXY(49, 14); cout << "|         |     \\     |     |         |        |      |            |     \\     |     |     /        \\     |      /"; Sleep(x);
 	gotoXY(49, 15); cout << "|         |      \\    |     |         |        |      |            |      \\    |     |    /          \\    |     /"; Sleep(x);
 	gotoXY(49, 16); cout << " ------   |       \\    -----    ------   ------       |            |       \\    -----    /            \\   -----/"; Sleep(x);
+}
+
+void Screen::notiLevelUp() const
+{
+	yaosu::printCenter(rightBorder, width, "LEVEL UP", 40, Color::BLUE);
+	Sleep(200);
+	yaosu::printCenter(rightBorder, width, "LEVEL UP", 40, Color::CYAN);
+	Sleep(200);
+	yaosu::printCenter(rightBorder, width, "LEVEL UP", 40, Color::BLUE);
+	Sleep(200);
+	yaosu::printCenter(rightBorder, width, "LEVEL UP", 40, Color::CYAN);
+	Sleep(200);
+	yaosu::printCenter(rightBorder, width, "        ", 40, Color::CYAN);
 }

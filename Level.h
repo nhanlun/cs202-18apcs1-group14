@@ -11,7 +11,7 @@
 class Level
 {
 public:
-	Level(int noLevel, Screen& sc, State& state, Color playerColor);
+	Level(int noLevel, Screen& sc, State& state, Color playerColor, Difficulty diff);
 	~Level();
 
 	void run(const Screen& sc, int& saveSlot);
