@@ -19,7 +19,8 @@ public:
 	bool isImpact(Obstacle* obstacle, Direction dir) const;
 
 	void play(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSlot);
-	void reset();
+	void resetBottomPavement();
+	void resetLevel();
 
 private:
 	void hide();

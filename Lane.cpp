@@ -16,6 +16,7 @@ Lane::~Lane()
 
 void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 {
+	initLane(); //Clear the lane (in case the level is reset)
 	randomObstacles(sc);
 	while (state == State::RUN || state == State::PAUSE)
 	{
@@ -32,6 +33,14 @@ void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 		}
 		Sleep(50);
 	}
+}
+
+void Lane::initLane()
+{
+	for (auto const& obstacle : obstacles) delete obstacle;
+	obstacles.clear();
+	time = lightClock = 0;
+	if (trafficLight->isGreen()) trafficLight->changeState();
 }
 
 void Lane::randomObstacles(const Screen& sc)

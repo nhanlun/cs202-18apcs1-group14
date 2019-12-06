@@ -144,6 +144,7 @@ int Screen::difficultyMenu()
 
 void Screen::levelDisplay(int noLevel)
 {
+	yaosu::printCenter(rightBorder, width, "          ", 18);
 	yaosu::printCenter(rightBorder, width, "Level: " + std::to_string(noLevel+1), 18);
 }
 

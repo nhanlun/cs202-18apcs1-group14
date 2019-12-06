@@ -32,7 +32,8 @@ Level::~Level()
 }
 
 void Level::run(const Screen& sc, int& saveSlot)
-{
+{	
+	player->resetLevel();
 	unsigned noLane = 1;
 
 	while (noLane <= lanes.size())
@@ -59,7 +60,7 @@ void Level::save(std::ofstream & fo)
 void Level::resetPlayer()
 {
 	gameState = State::RUN;
-	player->reset();
+	player->resetBottomPavement();
 	player->display();
 }
 

@@ -22,6 +22,7 @@ public:
 	void save(std::ofstream& fo);
 
 private:
+	void initLane();
 	void randomObstacles(const Screen& sc);	//initialize random obstacles on lane
 	void spawnObstacles(const Screen& sc);
 	void moveObstacles(const Screen& sc, std::mutex* ioMtx);

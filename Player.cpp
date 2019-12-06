@@ -135,7 +135,13 @@ void Player::saveMode(const Screen& sc, std::mutex* ioMtx, int& saveSlot)
 	if (action != 3) saveSlot = action;
 }
 
-void Player::reset()
+void Player::resetBottomPavement()
 {
+	y = 41;
+}
+
+void Player::resetLevel()
+{
+	x = 15;
 	y = 41;
 }
