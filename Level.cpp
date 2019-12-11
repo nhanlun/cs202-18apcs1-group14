@@ -57,6 +57,12 @@ void Level::save(std::ofstream & fo)
 		i->save(fo);
 }
 
+void Level::load(std::ifstream& fin)
+{
+	for (auto& i : lanes)
+		i->load(fin);
+}
+
 void Level::resetPlayer()
 {
 	gameState = State::RUN;

@@ -16,6 +16,7 @@ public:
 
 	void run(const Screen& sc, int& saveSlot);
 	void save(std::ofstream& fo);
+	void load(std::ifstream& fin);
 
 private:
 	void resetPlayer();

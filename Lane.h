@@ -20,6 +20,7 @@ public:
 	bool isImpact(int x);
 	bool isImpact(Player* p) const;
 	void save(std::ofstream& fo);
+	void load(std::ifstream& fin);
 
 private:
 	void initLane();

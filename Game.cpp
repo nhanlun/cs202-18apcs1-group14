@@ -27,7 +27,7 @@ void Game::run()
 		switch (action)
 		{
 		case 0:
-			play();
+			play(true);
 			break;
 		case 1:
 			break;
@@ -57,8 +57,30 @@ void Game::initGame()
 	}
 }
 
-void Game::load()
+void Game::load(int saveSlot)
 {
+	std::ifstream fin;
+
+	switch (saveSlot)
+	{
+	case 0:
+		fin.open("game1.bin", std::ios::binary);
+		break;
+	case 1:
+		fin.open("game2.bin", std::ios::binary);
+		break;
+	case 2:
+		fin.open("game3.bin", std::ios::binary);
+		break;
+	case 3:
+		return;
+	default:;
+	}
+
+	fin.read((char*)& currentLevel, 4);
+	for (auto& i : levels)
+		i->load(fin);
+	fin.close();
 }
 
 void Game::save(int saveSlot)
@@ -68,31 +90,33 @@ void Game::save(int saveSlot)
 	switch (saveSlot)
 	{
 	case 0:
-		fo.open("game1.txt");
+		fo.open("game1.bin", std::ios::binary);
 		break;
 	case 1:
-		fo.open("game2.txt");
+		fo.open("game2.bin", std::ios::binary);
 		break;
 	case 2:
-		fo.open("game3.txt");
+		fo.open("game3.bin", std::ios::binary);
 		break;
 	case 3:
 		return;
 	default:;
 	}
 	
-	fo << currentLevel << '\n';
+	//fo << currentLevel << '\n';
+	fo.write((char*)& currentLevel, 4);
 	for (auto& i : levels)
 		i->save(fo);
 	fo.close();
 	sc.saveSuccessfully();
 }
 
-void Game::play()
+void Game::play(bool newGame)
 {
 	system("cls");
 	sc.runScreen();
-	initGame();
+	if (newGame) 
+		initGame();
 	while (true)
 	{
 		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -174,7 +198,7 @@ void Game::changeDifficulty()
 bool Game::createSettingFile()
 {
 	std::ofstream fo;
-	fo.open("Setting.cfg", std::ios::binary);
+	fo.open("Setting.bin", std::ios::binary);
 
 	if (!fo.is_open())
 		return false;
@@ -194,7 +218,7 @@ bool Game::createSettingFile()
 bool Game::loadSettingFile()
 {
 	std::ifstream fin;
-	fin.open("Setting.cfg", std::ios::binary);
+	fin.open("Setting.bin", std::ios::binary);
 
 	if (!fin.is_open())
 		return false;
@@ -214,7 +238,7 @@ bool Game::loadSettingFile()
 bool Game::saveSettingFile()
 {
 	std::ofstream fo;
-	fo.open("Setting.cfg", std::ios::binary);
+	fo.open("Setting.bin", std::ios::binary);
 
 	if (!fo.is_open())
 		return false;

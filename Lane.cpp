@@ -136,12 +136,37 @@ bool Lane::isImpact(Player* p) const
 
 void Lane::save(std::ofstream & fo)
 {
-	fo << (int)dir << '\n';
+	/*fo << (int)dir << '\n';
 	fo << (int)obsType<<'\n';
 	fo << row << '\n';
 	fo << (int)obsColor << '\n';
 	fo << spawnTime << '\n';
-	fo << (int)speed << '\n';
+	fo << (int)speed << '\n';*/
+	int tmp = (int)dir;
+	fo.write((char*)& tmp, 4);
+	tmp = (int)obsType;
+	fo.write((char*)& tmp, 4);
+	fo.write((char*)& row, 4);
+	tmp = (int)obsColor;
+	fo.write((char*)& tmp, 4);
+	fo.write((char*)& spawnTime, 4);
+	tmp = (int)speed;
+	fo.write((char*)& tmp, 4);
+}
+
+void Lane::load(std::ifstream& fin)
+{
+	int tmp;
+	fin.read((char*)& tmp, 4);
+	dir = (Direction)tmp;
+	fin.read((char*)& tmp, 4);
+	obsType = (Type)tmp;
+	fin.read((char*)& row, 4);
+	fin.read((char*)& tmp, 4);
+	obsColor = (Color)tmp;
+	fin.read((char*)& spawnTime, 4);
+	fin.read((char*)& tmp, 4);
+	speed = (Speed)tmp;
 }
 
 Obstacle* Lane::obsFactory(const Screen& sc)
