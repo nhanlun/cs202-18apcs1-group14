@@ -95,6 +95,7 @@ void Game::play()
 	initGame();
 	while (true)
 	{
+		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 		sc.levelDisplay(currentLevel);
 		int saveSlot = -1;
 		levels[currentLevel]->run(sc, saveSlot);
@@ -173,14 +174,19 @@ void Game::changeDifficulty()
 bool Game::createSettingFile()
 {
 	std::ofstream fo;
-	fo.open("Setting.cfg");
+	fo.open("Setting.cfg", std::ios::binary);
 
 	if (!fo.is_open())
 		return false;
 
-	fo << 1 << '\n';
-	fo << (int)Color::DEFAULT << '\n';
-	fo << (int)Difficulty::MEDIUM << '\n';
+	bool tmp = 1;
+	fo.write((char*)& tmp, 1);
+
+	int color = (int)Color::DEFAULT;
+	fo.write((char*)& color, 4);
+
+	int diff = (int)Difficulty::MEDIUM;
+	fo.write((char*)& diff, 4);
 	fo.close();
 	return true;
 }
@@ -188,20 +194,19 @@ bool Game::createSettingFile()
 bool Game::loadSettingFile()
 {
 	std::ifstream fin;
-	fin.open("Setting.cfg");
+	fin.open("Setting.cfg", std::ios::binary);
 
 	if (!fin.is_open())
 		return false;
 
-	fin >> sound;
+	fin.read((char*)& sound, 1);
 
-	int color; 
-	fin >> color;
-	playerColor = Color(color);
+	int tmp;
+	fin.read((char*)& tmp, 4);
+	playerColor = (Color)(tmp);
 
-	int diff;
-	fin >> diff;
-	difficulty = Difficulty(diff);
+	fin.read((char*)& tmp, 4);
+	difficulty = (Difficulty)(tmp);
 	fin.close();
 	return true;
 }
@@ -209,14 +214,19 @@ bool Game::loadSettingFile()
 bool Game::saveSettingFile()
 {
 	std::ofstream fo;
-	fo.open("Setting.cfg");
+	fo.open("Setting.cfg", std::ios::binary);
 
 	if (!fo.is_open())
 		return false;
 
-	fo << sound<<'\n';
-	fo << (int)playerColor << '\n';
-	fo << (int)difficulty << '\n';
+	fo.write((char*)& sound, 1);
+
+	int color = (int)playerColor;
+	fo.write((char*)& color, 4);
+
+	int diff = (int)difficulty;
+	fo.write((char*)& diff, 4);
+
 	fo.close();
 	return true;
 }
