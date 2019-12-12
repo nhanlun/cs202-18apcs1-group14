@@ -158,13 +158,16 @@ void Game::play(bool newGame)
 
 		if (gameState != State::WIN)
 		{
-			if (gameState == State::LOSE && !stopPlaying())
+			if (gameState == State::LOSE)
 			{
 				if (sound)
 					yaosu::playThemeSong();
-				system("cls");
-				sc.runScreen();
-				continue;
+				if (!stopPlaying())
+				{
+					system("cls");
+					sc.runScreen();
+					continue;
+				}
 			}
 
 			if (gameState == State::SAVE) save(saveSlot);
