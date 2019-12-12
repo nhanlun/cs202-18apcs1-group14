@@ -75,6 +75,7 @@ int Screen::menuScreen()
 	using std::cout;
 
 	system("cls");
+	background();
 	color(int(Color::CYAN));
 	gotoXY(102, 24); cout << "New game";
 	gotoXY(102, 25); cout << "Load game";
@@ -142,6 +143,24 @@ int Screen::difficultyMenu()
 	return menuSelect(option, 4);
 }
 
+int Screen::gameOverMenu()
+{
+	using yaosu::printCenter;
+	using yaosu::color;
+
+	system("cls");
+	background();
+
+	printCenter(0, width, "GAME OVER", 21, Color::CYAN);
+	printCenter(0, width, "---------------", 22, Color::CYAN);
+	printCenter(0, width, "Do you want to replay this level?", 23, Color::CYAN);
+	printCenter(0, width, "OK", 24, Color::CYAN);
+	printCenter(0, width, "NO", 25, Color::CYAN);
+
+	int option[] = { 0,1 };
+	return menuSelect(option, 2);
+}
+
 void Screen::levelDisplay(int noLevel)
 {
 	yaosu::printCenter(rightBorder, width, "          ", 18);
@@ -175,6 +194,20 @@ int Screen::saveScreen() const
 	yaosu::printCenter(rightBorder, width, "Back", 34);
 	int option[] = {0, 1, 2, 3};
 	return menuSelect(option, 4, 160,31);
+}
+
+int Screen::loadScreen() const
+{
+	system("cls");
+	background();
+	yaosu::color((int)Color::CYAN);
+	yaosu::printCenter(0, width, "Which file do you want to load?", 23, Color::CYAN);
+	yaosu::printCenter(0, width, "File 1", 24, Color::CYAN);
+	yaosu::printCenter(0, width, "File 2", 25, Color::CYAN);
+	yaosu::printCenter(0, width, "File 3", 26, Color::CYAN);
+	yaosu::printCenter(0, width, "Back", 27, Color::CYAN);
+	int option[] = { 0, 1, 2, 3 };
+	return menuSelect(option, 4);
 }
 
 void Screen::saveSuccessfully()
@@ -288,6 +321,12 @@ void Screen::eraseCenter() const
 		}
 }
 
+void Screen::background() const
+{
+	drawBorder();
+	drawCrossyRoad(0, 10);
+}
+
 int Screen::menuSelect(int option[], int numOptions, int col,int row) const
 {
 	displayCursor(col,row);
@@ -335,7 +374,7 @@ void Screen::moveCursor(int x, int& cur, int numOptions,int col,int row) const
 	}
 }
 
-void Screen::drawBorder()
+void Screen::drawBorder() const
 {
 	using yaosu::color;
 	using yaosu::gotoXY;
@@ -361,7 +400,7 @@ void Screen::drawBorder()
 	cout << (char)188;
 }
 
-void Screen::drawCrossyRoad(int x, int y)
+void Screen::drawCrossyRoad(int x, int y) const
 {
 	using yaosu::color;
 	using yaosu::gotoXY;
@@ -390,4 +429,10 @@ void Screen::notiLevelUp() const
 	yaosu::printCenter(rightBorder, width, "LEVEL UP", 40, Color::CYAN);
 	Sleep(200);
 	yaosu::printCenter(rightBorder, width, "        ", 40, Color::CYAN);
+}
+
+void Screen::notiCannotLoad() const
+{
+	yaosu::printCenter(0, width, "This slot is empty", 29);
+	Sleep(1500);
 }

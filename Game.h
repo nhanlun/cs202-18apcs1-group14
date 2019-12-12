@@ -16,7 +16,8 @@ public:
 
 private:
 	void initGame();
-	void load(int saveSlot);
+	void loadGame();
+	bool load(int saveSlot);
 	void save(int saveSlot);
 	void play(bool newGame);
 	void settings();
@@ -25,6 +26,7 @@ private:
 	bool createSettingFile();
 	bool loadSettingFile();
 	bool saveSettingFile();
+	bool stopPlaying();
 
 	Screen sc;
 

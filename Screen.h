@@ -17,11 +17,13 @@ public:
 	int settingsMenu(); // 0: music on/off, 1: player color
 	int colorMenu();
 	int difficultyMenu();
+	int gameOverMenu();
 
 	void levelDisplay(int noLevel);
 	void runScreen() const;
 	void pauseScreen() const;
 	int saveScreen() const;
+	int loadScreen() const;
 	void saveSuccessfully();
 
 	Light* lightFactory(Direction dir, int row) const; //create traffic light base on lane row and direction
@@ -35,14 +37,17 @@ public:
 	void eraseCenter() const;
 
 	void notiLevelUp() const;
+	void notiCannotLoad() const;
 
 private:
+	void background() const;
+
 	int menuSelect(int option[], int numOptions,int col=98, int row=24) const;
 	void displayCursor(int col=98, int row=24) const;
 	void moveCursor(int x, int& cur, int numOptions,int col=98,int row=24) const;
 
-	void drawBorder();
-	void drawCrossyRoad(int x, int y); // draw the figure crossy road with sleep x, color y
+	void drawBorder() const;
+	void drawCrossyRoad(int x, int y) const; // draw the figure crossy road with sleep x, color y
 
 	const int width = 213;
 	const int height = 50;
