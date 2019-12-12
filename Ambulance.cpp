@@ -105,7 +105,6 @@ void Ambulance::run(Direction dir,const Screen& sc)
 			Sleep(60);
 		}
 	}
-	yaosu::playThemeSong();
 }
 
 

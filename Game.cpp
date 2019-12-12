@@ -160,6 +160,8 @@ void Game::play(bool newGame)
 		{
 			if (gameState == State::LOSE && !stopPlaying())
 			{
+				if (sound)
+					yaosu::playThemeSong();
 				system("cls");
 				sc.runScreen();
 				continue;
