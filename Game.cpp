@@ -147,8 +147,8 @@ void Game::play(bool newGame)
 {
 	system("cls");
 	sc.runScreen();
-	if (newGame) 
-		initGame();
+	if (newGame) initGame();
+
 	while (true)
 	{
 		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -158,6 +158,13 @@ void Game::play(bool newGame)
 
 		if (gameState != State::WIN)
 		{
+			if (gameState == State::LOSE && !stopPlaying())
+			{
+				system("cls");
+				sc.runScreen();
+				continue;
+			}
+
 			if (gameState == State::SAVE) save(saveSlot);
 			break;
 		}
@@ -285,4 +292,9 @@ bool Game::saveSettingFile()
 
 	fo.close();
 	return true;
+}
+
+bool Game::stopPlaying()
+{
+	return (sc.gameOverMenu() == 1); // refuse to replay
 }

@@ -17,6 +17,7 @@ public:
 	int settingsMenu(); // 0: music on/off, 1: player color
 	int colorMenu();
 	int difficultyMenu();
+	int gameOverMenu();
 
 	void levelDisplay(int noLevel);
 	void runScreen() const;

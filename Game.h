@@ -26,6 +26,7 @@ private:
 	bool createSettingFile();
 	bool loadSettingFile();
 	bool saveSettingFile();
+	bool stopPlaying();
 
 	Screen sc;
 

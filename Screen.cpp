@@ -143,6 +143,24 @@ int Screen::difficultyMenu()
 	return menuSelect(option, 4);
 }
 
+int Screen::gameOverMenu()
+{
+	using yaosu::printCenter;
+	using yaosu::color;
+
+	system("cls");
+	background();
+
+	printCenter(0, width, "GAME OVER", 21, Color::CYAN);
+	printCenter(0, width, "---------------", 22, Color::CYAN);
+	printCenter(0, width, "Do you want to replay this level?", 23, Color::CYAN);
+	printCenter(0, width, "OK", 24, Color::CYAN);
+	printCenter(0, width, "NO", 25, Color::CYAN);
+
+	int option[] = { 0,1 };
+	return menuSelect(option, 2);
+}
+
 void Screen::levelDisplay(int noLevel)
 {
 	yaosu::printCenter(rightBorder, width, "          ", 18);
