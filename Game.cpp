@@ -20,7 +20,7 @@ Game::~Game()
 
 void Game::run()
 {
-	//sc.splashScreen();
+	sc.splashScreen();
 	int action = sc.menuScreen();
 	while (1)
 	{
@@ -30,6 +30,7 @@ void Game::run()
 			play(true);
 			break;
 		case 1:
+			loadGame();
 			break;
 		case 2:
 			settings();
@@ -57,7 +58,27 @@ void Game::initGame()
 	}
 }
 
-void Game::load(int saveSlot)
+void Game::loadGame()
+{
+	int action = sc.loadScreen();
+	while (action != 3)
+	{
+		bool loaded = load(action);
+		if (!loaded)
+		{
+			sc.notiCannotLoad();
+		}
+		else
+		{
+			play(false);
+			return;
+		}
+		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+		action = sc.loadScreen();
+	}
+}
+
+bool Game::load(int saveSlot)
 {
 	std::ifstream fin;
 
@@ -72,15 +93,26 @@ void Game::load(int saveSlot)
 	case 2:
 		fin.open("game3.bin", std::ios::binary);
 		break;
-	case 3:
-		return;
 	default:;
 	}
 
+	if (!fin.is_open())
+		return false;
+
+	gameState = State::RUN;
+	if (levels.empty())
+	{
+		levels.resize(10, nullptr);
+		for (unsigned noLevel = 1; noLevel <= levels.size(); ++noLevel)
+		{
+			levels[noLevel - 1] = new Level(noLevel, sc, gameState, playerColor, difficulty);
+		}
+	}
 	fin.read((char*)& currentLevel, 4);
 	for (auto& i : levels)
 		i->load(fin);
 	fin.close();
+	return true;
 }
 
 void Game::save(int saveSlot)
