@@ -25,8 +25,19 @@ void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 			spawnObstacles(sc);
 			moveObstacles(sc, ioMtx);
 			lightManip(ioMtx);
-			if (isImpact(p)) state = State::LOSE;
-
+			if (isImpact(p))
+			{
+				int border;
+				state = State::LOSE;
+				if (dir == Direction::LEFT)
+					border = sc.getRightBorder(); 
+				else
+					border = sc.getLeftBorder();
+				Ambulance ambulance(border, row, dir);
+				ioMtx->lock();
+				ambulance.run(dir, sc);
+				ioMtx->unlock();
+			}
 			//Count the clock
 			if (trafficLight->isGreen()) ++time;
 			++lightClock;

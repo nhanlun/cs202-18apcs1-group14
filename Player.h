@@ -21,6 +21,7 @@ public:
 	void play(const Screen& sc, std::mutex* ioMtx, State& state, int& saveSlot);
 	void resetBottomPavement();
 	void resetLevel();
+	int getPositionX() const;
 
 private:
 	void hide();

@@ -145,3 +145,8 @@ void Player::resetLevel()
 	x = 15;
 	y = 41;
 }
+
+int Player::getPositionX() const
+{
+	return x;
+}

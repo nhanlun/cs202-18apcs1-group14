@@ -6,6 +6,7 @@
 #include "Truck.h"
 #include "Dinosaur.h"
 #include "Player.h"
+#include "Ambulance.h"
 #include <fstream>
 
 class Lane
