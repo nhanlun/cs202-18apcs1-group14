@@ -14,7 +14,7 @@ class Lane
 public:
 	Lane(const Screen& sc, Direction _dir, Type _type, int _row, 
 		Color _clr = Color::DEFAULT, int spawn = 20, Speed _speed = Speed::SAFE, 
-		int _green = 300, int _red = 150);
+		int _green = 150, int _red = 100);
 	~Lane();
 	void run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p); // run the clock and update all the object of that lane
 

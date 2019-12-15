@@ -6,7 +6,9 @@ Level::Level(int noLevel, Screen& _sc, State& state, Color playerColor, Difficul
 
 	for (unsigned index = 0; index < lanes.size(); ++index)
 	{
-		Direction dir = Direction(3 - (index % 2) * 2);
+		bool isLeft = rand() % 2;
+		Direction dir = isLeft ? Direction::LEFT : Direction::RIGHT;
+
 		Type type = Type(rand() % int(Type::Count));
 		int row = 32 - 7 * (index % 4);
 		Color clr = Color(rand() % 9 + 7);
