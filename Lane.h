@@ -24,7 +24,7 @@ public:
 	void load(std::ifstream& fin);
 
 private:
-	void initLane();
+	void initLane(const Screen& sc);
 	void randomObstacles(const Screen& sc);	//initialize random obstacles on lane
 	void spawnObstacles(const Screen& sc);
 	void moveObstacles(const Screen& sc, std::mutex* ioMtx);
