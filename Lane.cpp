@@ -1,12 +1,9 @@
 #include "Lane.h"
 
-Lane::Lane(const Screen& sc, Direction _dir, Type _type, int _row, Color _clr, 
-	int spawn, Speed _speed, int _green, int _red) : dir(_dir), obsType(_type), 
-	row(_row), spawnTime(spawn), speed(_speed), greenTime(_green), 
-	redTime(_red), obsColor(_clr), time(0), lightClock(0)
-{
-	trafficLight = sc.lightFactory(dir, row);
-}
+Lane::Lane(const Screen& sc, Direction _dir, Type _type, int _row, Color _clr,
+	int spawn, Speed _speed, int _green, int _red) : dir(_dir), obsType(_type),
+	row(_row), spawnTime(spawn), speed(_speed), greenTime(_green),
+	redTime(_red), obsColor(_clr), time(0), lightClock(0) {}
 
 Lane::~Lane()
 {
@@ -16,7 +13,7 @@ Lane::~Lane()
 
 void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 {
-	initLane(); //Clear the lane (in case the level is reset)
+	initLane(sc); //Clear the lane (in case the level is reset)
 	randomObstacles(sc);
 	while (state == State::RUN || state == State::PAUSE)
 	{
@@ -46,8 +43,11 @@ void Lane::run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p)
 	}
 }
 
-void Lane::initLane()
+void Lane::initLane(const Screen& sc)
 {
+	if (trafficLight) delete trafficLight;
+	trafficLight = sc.lightFactory(dir, row);
+
 	for (auto const& obstacle : obstacles) delete obstacle;
 	obstacles.clear();
 	time = lightClock = 0;
@@ -129,14 +129,6 @@ void Lane::lightManip(std::mutex* ioMtx)
 	}
 }
 
-bool Lane::isImpact(int x)
-{
-	for (auto& i : obstacles)
-		if (i->isImpact(x))
-			return true;
-	return false;
-}
-
 bool Lane::isImpact(Player* p) const
 {
 	for (auto& i : obstacles)
@@ -147,12 +139,6 @@ bool Lane::isImpact(Player* p) const
 
 void Lane::save(std::ofstream & fo)
 {
-	/*fo << (int)dir << '\n';
-	fo << (int)obsType<<'\n';
-	fo << row << '\n';
-	fo << (int)obsColor << '\n';
-	fo << spawnTime << '\n';
-	fo << (int)speed << '\n';*/
 	int tmp = (int)dir;
 	fo.write((char*)& tmp, 4);
 	tmp = (int)obsType;

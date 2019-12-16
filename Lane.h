@@ -18,13 +18,12 @@ public:
 	~Lane();
 	void run(const Screen& sc, std::mutex* ioMtx, State& state, Player* p); // run the clock and update all the object of that lane
 
-	bool isImpact(int x);
 	bool isImpact(Player* p) const;
 	void save(std::ofstream& fo);
 	void load(std::ifstream& fin);
 
 private:
-	void initLane();
+	void initLane(const Screen& sc);
 	void randomObstacles(const Screen& sc);	//initialize random obstacles on lane
 	void spawnObstacles(const Screen& sc);
 	void moveObstacles(const Screen& sc, std::mutex* ioMtx);
