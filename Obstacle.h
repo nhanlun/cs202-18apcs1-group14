@@ -16,8 +16,6 @@ public:
 
 	bool outOfScreen(Direction dir, const Screen& sc);
 
-	bool isImpact(int pos);
-
 protected:
 	int x, y; //top-left corner
 	int width, height; //size of figures
