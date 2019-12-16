@@ -161,6 +161,26 @@ int Screen::gameOverMenu()
 	return menuSelect(option, 2);
 }
 
+bool Screen::winScreen()
+{
+	using yaosu::printCenter;
+	using yaosu::color;
+
+	system("cls");
+	background();
+
+	printCenter(0, width, "YOU ARE THE WINNER!!!", 21, Color::CYAN);
+	printCenter(0, width, "Congratulations!", 22, Color::CYAN);
+	printCenter(0, width, "---------------", 23, Color::CYAN);
+	printCenter(0, width, "Do you want to replay our game?", 24, Color::CYAN);
+	printCenter(0, width, "OK", 25, Color::CYAN);
+	printCenter(0, width, "NO", 26, Color::CYAN);
+
+	int option[] = { 0,1 };
+	return (!menuSelect(option, 2,98,25));
+}
+
+
 void Screen::levelDisplay(int noLevel)
 {
 	yaosu::printCenter(rightBorder, width, "          ", 18);

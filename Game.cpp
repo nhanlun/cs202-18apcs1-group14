@@ -176,7 +176,17 @@ void Game::play(bool newGame)
 		
 		sc.notiLevelUp();
 		++currentLevel;
-		if (currentLevel == int(levels.size())) currentLevel = 0;
+		if (currentLevel == int(levels.size()))
+		{
+			if (sc.winScreen())
+			{
+				currentLevel = 0;
+				system("cls");
+				sc.runScreen();
+			}
+			else
+				return;
+		}
 	}
 }
 

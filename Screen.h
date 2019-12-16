@@ -18,6 +18,7 @@ public:
 	int colorMenu();
 	int difficultyMenu();
 	int gameOverMenu();
+	bool winScreen();
 
 	void levelDisplay(int noLevel);
 	void runScreen() const;
