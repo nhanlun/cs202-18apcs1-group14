@@ -129,14 +129,6 @@ void Lane::lightManip(std::mutex* ioMtx)
 	}
 }
 
-bool Lane::isImpact(int x)
-{
-	for (auto& i : obstacles)
-		if (i->isImpact(x))
-			return true;
-	return false;
-}
-
 bool Lane::isImpact(Player* p) const
 {
 	for (auto& i : obstacles)
@@ -147,12 +139,6 @@ bool Lane::isImpact(Player* p) const
 
 void Lane::save(std::ofstream & fo)
 {
-	/*fo << (int)dir << '\n';
-	fo << (int)obsType<<'\n';
-	fo << row << '\n';
-	fo << (int)obsColor << '\n';
-	fo << spawnTime << '\n';
-	fo << (int)speed << '\n';*/
 	int tmp = (int)dir;
 	fo.write((char*)& tmp, 4);
 	tmp = (int)obsType;
