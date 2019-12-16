@@ -311,5 +311,6 @@ bool Game::saveSettingFile()
 
 bool Game::stopPlaying()
 {
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 	return (sc.gameOverMenu() == 1); // refuse to replay
 }

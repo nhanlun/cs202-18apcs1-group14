@@ -349,6 +349,7 @@ void Screen::background() const
 
 int Screen::menuSelect(int option[], int numOptions, int col,int row) const
 {
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 	displayCursor(col,row);
 	int cur = row;
 

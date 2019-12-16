@@ -142,7 +142,7 @@ void Player::resetBottomPavement()
 
 void Player::resetLevel()
 {
-	x = 15;
+	x = 50;
 	y = 41;
 }
 

@@ -48,7 +48,7 @@ void Level::run(const Screen& sc, int& saveSlot)
 		addThreadPlayer(vThread, sc, saveSlot);
 		addThreadLanes(vThread, sc, noLane);
 		runThreads(vThread);
-
+		FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 		if (gameState != State::WIN) break;
 	}
 }
